@@ -5,7 +5,9 @@ using UnityEngine;
 public class TargetingSystem : MonoBehaviour
 {
     Transform selected;
-    bool firsttimeSelected=true;
+    Transform deselect;
+    Transform buttons;
+    bool firsttimeSelected =true;
     void Start()
     {
     }
@@ -16,16 +18,19 @@ public class TargetingSystem : MonoBehaviour
         //mouse position
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+
+
+        //highlight selection
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.collider != null)
             {
                 if (firsttimeSelected == false && hit.collider.name != selected.name)
-                { 
-
-                selected = hit.collider.transform;
-                    Debug.Log("Hit " + hit.collider.name);
-
+                {
+                    if (hit.collider.transform.tag !="Button")
+                    {
+                        selected = hit.collider.transform;
+                    }
                     selected.GetComponent<ParticleSystem>().Play();
                     //highlight tile 
                     //highlight cards on hand & aniamtion.
@@ -34,27 +39,42 @@ public class TargetingSystem : MonoBehaviour
                 {
                     firsttimeSelected = false;
                     selected = hit.collider.transform;
-                    Debug.Log("First Hit " + hit.collider.name);
                     selected.GetComponent<ParticleSystem>().Play();
-
+                    deselect = selected;
                 }
             }
-
-
-
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            
+            CheckCard();
 
         }
     }
 
     void CheckCard()
     {
+        Debug.Log("CLICKED "+selected.name);
+        if (deselect.name != selected.name&& selected.tag!= "Button")
+        {
+            buttons = deselect.GetChild(0);
+            buttons.gameObject.SetActive(false);
+
+            deselect = selected;
+            //return to normal
+
+        }
+
+        buttons = selected.GetChild(0);
+        buttons.gameObject.SetActive(true);
+
+        Debug.Log("---BUTTON---- " + buttons.name);
 
 
-
+        //show cards info. 
+        //showbuttons
     }
+
+
+
 }
