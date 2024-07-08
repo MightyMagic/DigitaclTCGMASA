@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DeckDrawCard : MonoBehaviour
@@ -12,29 +10,28 @@ public class DeckDrawCard : MonoBehaviour
     {
          deck = gameObject.GetComponent<Deck>();
         hand= FindAnyObjectByType<Hands>();
+
     }
 
     public void DrawCard()
     {
-        if (deck.myCards[0] == null)
-        {
+        if (deck.myCards.Count==0) {
+
+            //update the server I losted.
+
             Debug.Log("no more cards");
-
-
-        }
+                }
         else
         {
             //send it to hand
+            deck.myCards[0].transform.parent = hand.transform;
             hand.cardsOnHand.Add(deck.myCards[0]);
+            hand.cardsOnHand[0].gameObject.GetComponent<BaseCards>().UpdateCardState(CardState.hand);
+
             Debug.Log("I added "+ deck.myCards[0].name);
             Debug.Log("I removed " + deck.myCards[0].name);
             deck.myCards.Remove(deck.myCards[0]);
-
-            //update the server
-
-
+            //update the server I draw
         }
     }
-
-
 }

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 305657575003905364}
   m_Layer: 0
   m_Name: Card
-  m_TagString: OnHands
+  m_TagString: Deck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5023,6 +5023,7 @@ GameObject:
   - component: {fileID: 8113293359074311106}
   - component: {fileID: 6023546766982789807}
   - component: {fileID: 7274922972928194129}
+  - component: {fileID: 5757443962319671162}
   m_Layer: 0
   m_Name: button
   m_TagString: Button
@@ -5117,3 +5118,30 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &5757443962319671162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484697665817373409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 684b4937184f3ec48ae604a4dcd1c785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonEffect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5757443962319671162}
+        m_TargetAssemblyTypeName: ActivateButton, Assembly-CSharp
+        m_MethodName: TestButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

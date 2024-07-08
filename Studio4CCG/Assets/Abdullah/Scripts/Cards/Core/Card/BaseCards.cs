@@ -13,7 +13,7 @@ public class BaseCards : MonoBehaviour
     public IBaseEffect BaseEffect;
     public CardState cardState=CardState.deck;
 
-    private void Start()
+    private void Awake()
     {
         for (int i = 0; i < 24; i++)
         {
@@ -45,7 +45,35 @@ public class BaseCards : MonoBehaviour
     //other cards effect it
     public void UpdateCardState(CardState newState)
     {
-        cardState= newState;
+        cardState = newState;
+        switch (newState)
+        {
+            case CardState.hand:
+
+                 gameObject.tag="OnHands";
+                break;
+            case CardState.graveyard:
+
+                gameObject.tag = "Grave";
+                break;
+            case CardState.deck:
+
+                gameObject.tag = "Deck";
+                break;
+            case CardState.field:
+
+                gameObject.tag = "Tile";
+                break;
+
+
+
+
+
+                default:
+                Debug.LogWarning("Unkown State from CardState");
+                break;
+
+        }
     }
     
     private int CalculateNewState(int myState, int value)

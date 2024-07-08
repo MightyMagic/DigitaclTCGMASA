@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class InteractionSystem : MonoBehaviour
 {
-    Transform selected;
-    Transform deselect;
+     Transform selected;
+     Transform deselect;
     Transform buttons;
     bool firsttimeSelected =true;
     public bool canDraw=true;
@@ -62,6 +62,7 @@ public class InteractionSystem : MonoBehaviour
                         //highlight tile 
                         //highlight cards on hand & aniamtion.
                     }
+
                 }
                 else if (firsttimeSelected == true)
                 {
