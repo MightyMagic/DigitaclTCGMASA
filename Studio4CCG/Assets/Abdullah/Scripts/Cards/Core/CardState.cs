@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StatesList
+public enum CardState
 {
-    attack,
-    defense,
-    health,
-    none,
+    hand,
+    field,
+    deck,
+    graveyard,
 
 }

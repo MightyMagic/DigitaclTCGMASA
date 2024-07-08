@@ -33,6 +33,7 @@ public class GenericEffect : MonoBehaviour, IBaseEffect
                         break;
                     }
                 }*/
+
     }
     public void ActivateEffect()
     {
