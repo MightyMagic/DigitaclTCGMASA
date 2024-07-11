@@ -2,15 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseCards : MonoBehaviour
+public class BaseCard : MonoBehaviour
 {
+    [Header("Card info")]
     [SerializeField] string cardID;
         string characters= "zxcvbnmasdfghjklqwertyuiop1234567890";
+    [SerializeField] CreatureTypeList creatureType;
+    [SerializeField] bool targetable = true;
+
     [SerializeField] int health = 0;
     [SerializeField] int defense = 0;
     [SerializeField] int attack=0;
+    [SerializeField] int manaCost;
 
-    public IBaseEffect BaseEffect;
+    [Header("Card Effect to trigger")]
+
+    public BaseEffect BaseEffect;
+    [Header("Card State")]
     public CardState cardState=CardState.deck;
 
     private void Awake()
@@ -19,7 +27,7 @@ public class BaseCards : MonoBehaviour
         {
             cardID += characters[Random.Range(0, characters.Length)];
         }
-        Debug.Log(cardID);
+       
     }
     public int EffectStats(int value, StatesList enumValue)
     {
@@ -65,14 +73,9 @@ public class BaseCards : MonoBehaviour
                 gameObject.tag = "Tile";
                 break;
 
-
-
-
-
                 default:
                 Debug.LogWarning("Unkown State from CardState");
                 break;
-
         }
     }
     

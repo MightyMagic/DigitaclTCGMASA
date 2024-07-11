@@ -14,7 +14,6 @@ public class InteractionSystem : MonoBehaviour
     void Start()
     {
         Deck=FindAnyObjectByType(typeof(Deck)).GameObject();
-        Debug.Log("I found " + Deck.name);
     }
 
     // Update is called once per frame
@@ -80,7 +79,6 @@ public class InteractionSystem : MonoBehaviour
 
         //highlight Selection.
 
-        Debug.Log("CLICKED "+selected.name);
 
         //if it's mising a child give it one
         if (deselect.name != selected.name&& selected.tag!= "Button")
@@ -95,7 +93,6 @@ public class InteractionSystem : MonoBehaviour
             }
             buttons = deselect.GetChild(0);
                 buttons.gameObject.SetActive(false);
-            Debug.Log("---BUTTON---- " + buttons.name);
 
 
 
@@ -106,7 +103,6 @@ public class InteractionSystem : MonoBehaviour
         //on card selected show buttons.
             buttons = selected.GetChild(0);
             buttons.gameObject.SetActive(true);
-        Debug.Log("---BUTTON---- " + buttons.name);
 
 
         //show cards info. 

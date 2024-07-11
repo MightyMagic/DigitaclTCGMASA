@@ -26,7 +26,7 @@ public class DeckDrawCard : MonoBehaviour
             //send it to hand
             deck.myCards[0].transform.parent = hand.transform;
             hand.cardsOnHand.Add(deck.myCards[0]);
-            hand.cardsOnHand[0].gameObject.GetComponent<BaseCards>().UpdateCardState(CardState.hand);
+            hand.cardsOnHand[0].gameObject.GetComponent<BaseCard>().UpdateCardState(CardState.hand);
 
             Debug.Log("I added "+ deck.myCards[0].name);
             Debug.Log("I removed " + deck.myCards[0].name);

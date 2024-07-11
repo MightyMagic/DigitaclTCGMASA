@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenericEffect : MonoBehaviour, IBaseEffect
+public class GenericEffect : BaseEffect
 {
 
     [Header("What to Target? ")]
@@ -17,33 +17,36 @@ public class GenericEffect : MonoBehaviour, IBaseEffect
     [Header("Does it effect Ownership? ")]
     public bool targetOwnership;
 
-    public void RequestActivate()
-    {
-        //Request Response from server
 
-        /*        bool isActivated=false;
-                bool[] targetlist = { targetCards, targetPlayer, targetTile, targetHand, targetDeck, targetGraveyard};
-                foreach (var item in targetlist)
-                {
-                    if (isActivated == true) break;
-                    if (item == true)
-                    {
-                        //RequestResponse()  from server
-                        isActivated = true;
-                        break;
-                    }
-                }*/
-
-    }
-    public void ActivateEffect()
+    //the server ask both player if they have a response.
+    public override bool RequestActivation()
     {
-        //Activate from server.
-        ResolvedEffect();
+
+        //check cards info if a condition can be met.
+        //Return true or false to the server.
+
+        //case true pause aske the player for a response. 
+
+        return false;
     }
-    public void ResolvedEffect()
+
+    //queue card to be activated, Then ask again RequestActivation();
+    // if both said no & no.
+    //ResolvedEffect()
+    public override void ActivateEffect()
+    {
+        //effect code goes here
+
+        RequestActivation();
+    }
+
+    // cards will be resolved 
+    // case it was destroied this effect won't activate
+    // because it was removed from the queue
+    public override  void ResolvedEffect()
     {
         //notiffy the server
-
+        //end result of chain effect activation.
     }
 
 }
