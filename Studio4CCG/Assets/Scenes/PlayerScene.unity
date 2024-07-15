@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 218166746}
   - component: {fileID: 218166747}
   m_Layer: 0
-  m_Name: --------On Hands-------------
+  m_Name: --------On Hands----------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2562,8 +2562,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7de37abffa52940995c451607530e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 0}
-  child: {fileID: 0}
+  myParent: {fileID: 0}
+  myChild: {fileID: 0}
+  description: 
   targetSelf: 0
   targetCards: 0
   targetPlayer: 0
@@ -2572,14 +2573,14 @@ MonoBehaviour:
   targetDeck: 0
   targetGraveyard: 0
   targetState: 0
-  targetHealth: 0
-  targetAttack: 0
-  targetDefense: 0
-  targetStates: 1
-  stateDeck: 0
-  stateHand: 0
-  stateGraveyard: 0
+  statesList: 0
+  byHowMuch: 0
   targetOwnership: 0
+  targetStates: 1
+  sendToDeck: 0
+  sendToHand: 0
+  sendToGraveyard: 0
+  sendToField: 0
 --- !u!64 &1390163893
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13749,6 +13750,10 @@ PrefabInstance:
     - target: {fileID: 110302840839337975, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
       propertyPath: m_Name
       value: Card
+      objectReference: {fileID: 0}
+    - target: {fileID: 305657575003905364, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
+      propertyPath: targetState
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1484697665817373409, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
       propertyPath: m_IsActive

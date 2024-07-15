@@ -6,7 +6,6 @@ public class BaseCard : MonoBehaviour
 {
     [Header("Card info")]
     [SerializeField] string cardID;
-        string characters= "zxcvbnmasdfghjklqwertyuiop1234567890";
     [SerializeField] CreatureTypeList creatureType;
     [SerializeField] bool targetable = true;
 
@@ -16,13 +15,17 @@ public class BaseCard : MonoBehaviour
     [SerializeField] int manaCost;
 
     [Header("Card Effect to trigger")]
-
     public BaseEffect BaseEffect;
+
+
     [Header("Card State")]
     public CardState cardState=CardState.deck;
 
+    //for generating ID
+    string characters = "zxcvbnmasdfghjklqwertyuiop1234567890";
     private void Awake()
     {
+
         for (int i = 0; i < 24; i++)
         {
             cardID += characters[Random.Range(0, characters.Length)];

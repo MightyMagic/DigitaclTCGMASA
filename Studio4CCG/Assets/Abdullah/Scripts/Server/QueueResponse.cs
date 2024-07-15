@@ -6,23 +6,31 @@ public class QueueResponse : MonoBehaviour
 {
     //
     public Transform lastChild=null;
-   public void RequestToBeQueued(Transform card)
+    BaseEffect baseEffect;
+
+    public void RequestToBeQueued(Transform card)
     {
+        baseEffect = card.gameObject.GetComponent<BaseEffect>();
+
         //it's the first.
         if (lastChild == null)
         {
             lastChild = card;
-            //send packet to players to update ?
-            //
+            Debug.Log("first element is "+lastChild.name);
+
         }
         //
         else
         {
             //assign the previous card child.
-            lastChild.GetComponent<BaseEffect>().child = card;
+            lastChild.GetComponent<BaseEffect>().myChild = card;
+            Debug.Log(lastChild.name + "Parent of: " + card.name);
+
             //assign the current card parent
-            card.parent = lastChild;
-            //update the last node in teh chian
+            baseEffect.myParent = lastChild;
+            Debug.Log(card.name+" Child of: " + lastChild.name);
+
+            //update the last node in the chian
             lastChild = card;
 
 

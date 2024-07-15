@@ -135,6 +135,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1484697665817373409, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
+      propertyPath: m_Name
+      value: button2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1484697665817373409, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128643123612522220, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.09122
@@ -357,6 +365,10 @@ PrefabInstance:
       value: Card
       objectReference: {fileID: 0}
     - target: {fileID: 1484697665817373409, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
+      propertyPath: m_Name
+      value: button1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1484697665817373409, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -412,6 +424,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5757443962319671162, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
+      propertyPath: buttonEffect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GenericEffect, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -428,6 +444,14 @@ PrefabInstance:
     - target: {fileID: 110302840839337975, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
       propertyPath: m_Name
       value: Card (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1484697665817373409, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
+      propertyPath: m_Name
+      value: button4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1484697665817373409, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128643123612522220, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
       propertyPath: m_LocalScale.x
@@ -497,6 +521,14 @@ PrefabInstance:
     - target: {fileID: 110302840839337975, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
       propertyPath: m_Name
       value: Card (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1484697665817373409, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
+      propertyPath: m_Name
+      value: button3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1484697665817373409, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128643123612522220, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
       propertyPath: m_LocalScale.x
@@ -659,6 +691,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1484697665817373409, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
+      propertyPath: m_Name
+      value: button6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1484697665817373409, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128643123612522220, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.09122
@@ -772,6 +812,14 @@ PrefabInstance:
     - target: {fileID: 110302840839337975, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
       propertyPath: m_Name
       value: Card (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1484697665817373409, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
+      propertyPath: m_Name
+      value: button5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1484697665817373409, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128643123612522220, guid: dfa07354bb2679546b9858a45acc26d5, type: 3}
       propertyPath: m_LocalScale.x

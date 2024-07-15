@@ -4980,11 +4980,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 
   creatureType: 0
+  targetable: 1
   health: 0
   defense: 0
   attack: 0
   manaCost: 0
-  targetable: 1
   BaseEffect: {fileID: 0}
   cardState: 2
 --- !u!114 &305657575003905364
@@ -4999,6 +4999,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7de37abffa52940995c451607530e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myParent: {fileID: 0}
+  myChild: {fileID: 0}
   targetSelf: 0
   targetCards: 0
   targetPlayer: 0
@@ -5137,9 +5139,9 @@ MonoBehaviour:
   buttonEffect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5757443962319671162}
-        m_TargetAssemblyTypeName: ActivateButton, Assembly-CSharp
-        m_MethodName: TestButton
+      - m_Target: {fileID: 305657575003905364}
+        m_TargetAssemblyTypeName: GenericEffect, Assembly-CSharp
+        m_MethodName: ActivateEffect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
