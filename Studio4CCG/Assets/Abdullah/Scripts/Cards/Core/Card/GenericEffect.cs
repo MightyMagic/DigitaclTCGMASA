@@ -29,22 +29,20 @@ public class GenericEffect : BaseEffect
     }
 
     //the server ask both player if they have a response.
-
     //need a target
     public override bool RequestActivation(BaseCard card)
     {
-
         queueResponse.RequestToBeQueued(gameObject.transform);
         //check cards info if a condition can be met.
         //Return true or false to the server.
 
-        //case true pause aske the player for a response. 
-
+        //case true pause asks the player for a response. 
         if (targetCards)
         {
             if (targetState) {
                 //targeted card
-                //card.
+                //card 
+                //
             }
             if (targetStates) { }
             if (targetOwnership) { }
@@ -86,7 +84,6 @@ public class GenericEffect : BaseEffect
     public override void ActivateEffect()
     {
         //effect code goes here
-
         RequestActivation(gameObject.GetComponent<BaseCard>());
     }
 

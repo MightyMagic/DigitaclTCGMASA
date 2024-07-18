@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class QueueResponse : MonoBehaviour
 {
-    //
+    //chain link
+    [HideInInspector]
     public Transform lastChild=null;
     BaseEffect baseEffect;
 

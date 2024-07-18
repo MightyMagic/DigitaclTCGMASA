@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8961038608505895761}
   - component: {fileID: 5694481535121794773}
   - component: {fileID: 305657575003905364}
+  - component: {fileID: 5683616371180630824}
   m_Layer: 0
   m_Name: Card
   m_TagString: Deck
@@ -31,14 +32,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 110302840839337975}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.4682553, y: -0, z: -0, w: 0.88359326}
-  m_LocalPosition: {x: -2.1, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.09121973, y: 0.24314132, z: 0.12978646}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4826869573773353019}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -55.842, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &334110105430589042
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -67,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dbd20244e3dbeab4794c9c47b071eeef, type: 2}
+  - {fileID: 2100000, guid: bdcb246cd905b0a48af23bc50837e287, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5001,6 +5002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myParent: {fileID: 0}
   myChild: {fileID: 0}
+  description: 
   targetSelf: 0
   targetCards: 0
   targetPlayer: 0
@@ -5009,14 +5011,35 @@ MonoBehaviour:
   targetDeck: 0
   targetGraveyard: 0
   targetState: 0
-  targetHealth: 0
-  targetAttack: 0
-  targetDefense: 0
-  targetStates: 1
-  stateDeck: 0
-  stateHand: 0
-  stateGraveyard: 0
+  statesList: 0
+  byHowMuch: 0
   targetOwnership: 0
+  targetStates: 1
+  sendToDeck: 0
+  sendToHand: 0
+  sendToGraveyard: 0
+  sendToField: 0
+--- !u!95 &5683616371180630824
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110302840839337975}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a6cf651e015effc4883bad15548cd43f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1484697665817373409
 GameObject:
   m_ObjectHideFlags: 0

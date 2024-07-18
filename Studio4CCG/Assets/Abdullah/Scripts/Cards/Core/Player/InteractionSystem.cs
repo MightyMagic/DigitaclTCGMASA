@@ -50,7 +50,7 @@ public class InteractionSystem : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                if (firsttimeSelected == false && hit.collider.name != selected.name)
+                if (firsttimeSelected == false && hit.collider.GetInstanceID() != selected.GetInstanceID())
                 {
 
                     if (hit.collider.transform.tag != "Button")
@@ -81,7 +81,7 @@ public class InteractionSystem : MonoBehaviour
 
 
         //if it's mising a child give it one
-        if (deselect.name != selected.name&& selected.tag!= "Button")
+        if (deselect.GetInstanceID() != selected.GetInstanceID() && selected.tag!= "Button")
         {
             //show buttons nested inside the card.
             if (selected.childCount == 0) {
