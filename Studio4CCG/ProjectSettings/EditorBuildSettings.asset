@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/BoardLogic.unity
+    guid: 4da3548079becbd42aeb504d74553e8a
   m_configObjects: {}
