@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 
@@ -17,7 +18,11 @@ public class Chating_Test : MonoBehaviour
 
     public void SendTextToServer()
     {
+
+
         NetworkManager.instance.SendData(new TestTextPacket(inputText.text).Serialize());
+
+
 
     }
 

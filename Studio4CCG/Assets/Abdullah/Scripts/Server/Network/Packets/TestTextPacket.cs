@@ -8,13 +8,15 @@ using UnityEngine.UIElements;
 public class TestTextPacket : BasePackt
 {
     public string Text { get; private set; }
+
     public TestTextPacket()
     {
         Text="Hellowo World";
 
 
     }
-    public TestTextPacket(string text)
+    public TestTextPacket(string text):base(PacketType.TestText)
+
     {
         Text = text;
     }
@@ -35,8 +37,6 @@ public class TestTextPacket : BasePackt
     {
         base.DeSerialize(buffer, bufferOffset);
         Text= binaryReader.ReadString();
-
-
         return this;
     }
 

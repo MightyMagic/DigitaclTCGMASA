@@ -6053,7 +6053,7 @@ GameObject:
   - component: {fileID: 743120818}
   - component: {fileID: 743120817}
   m_Layer: 0
-  m_Name: --------On Hands-------------
+  m_Name: --------On Hands----------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,6 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
@@ -20,14 +19,14 @@ public class MyServer : MonoBehaviour
 
         //socket end point. 
         serverSocket.Bind(new IPEndPoint(IPAddress.Any, 3000));
-        serverSocket.Listen(2);
+        serverSocket.Listen(0);
         serverSocket.Blocking = false;
 
 
     }
 
     // Update is called once per frame
-    void Update()
+   public  void Update()
     {
         //Add Clients
         //Recieve Data
@@ -47,11 +46,6 @@ public class MyServer : MonoBehaviour
         {
 
         }
-        //Recieved New Data
-        //Later Send Data
-        while (serverSocket.Available > 0)
-        {
-            Debug.Log("Data Availliable");
 
             for (int i = 0; clients.Count > i; i++)
             {
@@ -64,14 +58,23 @@ public class MyServer : MonoBehaviour
 
                     // we don't send back the same data again from where we recieve it.
                     for (int j = 0; clients.Count > j; j++)
+                    {
 
-                        if (i == j) continue;
-                        clients[i].Send(buffer);
-
+/*                    if (i == j) 
+                        {
+                            continue; 
+                        }
+*/                       
+                    
+                    clients[i].Send(buffer.ToArray());
+                    }
 
                 }
 
-                catch { }
+                catch 
+                { 
+                
+                }
 
 
 
@@ -79,7 +82,6 @@ public class MyServer : MonoBehaviour
 
 
             }
-        }
     }
 
 

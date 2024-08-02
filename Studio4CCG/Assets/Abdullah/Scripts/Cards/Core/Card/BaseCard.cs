@@ -7,7 +7,7 @@ public class BaseCard : MonoBehaviour
     [Header("Card info")]
     [SerializeField] string cardID;
     [SerializeField] CreatureTypeList creatureType;
-    [SerializeField] bool targetable = true;
+   // [SerializeField] bool targetable = true;
 
     [SerializeField] int health = 0;
     [SerializeField] int defense = 0;
@@ -88,6 +88,12 @@ public class BaseCard : MonoBehaviour
         if (myState < 0) myState = 0;
         return myState;
     }
+
+
+
+
+
+
 }
 
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 public class BasePackt 
@@ -23,15 +24,12 @@ public class BasePackt
     public BasePackt()
     {
         Type = PacketType.None;
-
     }
     //recieving data
     public BasePackt(PacketType type)
     {
         Type = type;
-
     }
-
 
     protected MemoryStream writeMemory;
     protected MemoryStream readMemory;
@@ -40,13 +38,12 @@ public class BasePackt
     protected BinaryReader binaryReader;
 
     
-    //player ownership info 
     protected void BeginSerialize()
     {
         // Initialize MemoryStream for writing
         writeMemory = new MemoryStream();
         binaryWriter = new BinaryWriter(writeMemory);
-
+        binaryWriter.Write(PacketSize);
         binaryWriter.Write((int)Type);
 
         // we add the data we want to write ?
@@ -55,7 +52,8 @@ public class BasePackt
     // packetSize + 4 to count for packet being stored in memory
     protected byte[] EndSerSerialize()
     {
-        PacketSize = (int)writeMemory.Length + 4;
+        PacketSize = (int)writeMemory.Length;
+        writeMemory.Position = 0;
         binaryWriter.Write(PacketSize);
         return writeMemory.ToArray();
     }
@@ -64,10 +62,11 @@ public class BasePackt
         readMemory= new MemoryStream(buffer);
         binaryReader= new BinaryReader(readMemory);
         readMemory.Seek(bufferOffset, SeekOrigin.Begin);
-        Type=(PacketType)binaryReader.ReadInt32();
 
-
+        PacketSize = binaryReader.ReadInt32();
+        Type = (PacketType)binaryReader.ReadInt32();
         return this;
     }
+
 
 }
