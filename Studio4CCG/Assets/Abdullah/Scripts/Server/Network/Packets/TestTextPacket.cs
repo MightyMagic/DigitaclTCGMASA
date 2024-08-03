@@ -11,7 +11,7 @@ public class TestTextPacket : BasePackt
 
     public TestTextPacket()
     {
-        Text="Hellowo World";
+        Text="";
 
 
     }

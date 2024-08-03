@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5334465223164314326}
   - component: {fileID: 1311323768047039611}
   - component: {fileID: 510587725951692306}
+  - component: {fileID: 235610783714112440}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -63,6 +64,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &235610783714112440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134064089720602422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 866edffb115466445a9f8f9f6cefb950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileList: {fileID: 0}
 --- !u!1 &7214963367651006887
 GameObject:
   m_ObjectHideFlags: 0
@@ -5044,7 +5058,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 
   creatureType: 0
-  targetable: 1
   health: 0
   defense: 0
   attack: 0
@@ -5225,9 +5238,9 @@ MonoBehaviour:
   buttonEffect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GenericEffect, Assembly-CSharp
-        m_MethodName: ActivateEffect
+      - m_Target: {fileID: 235610783714112440}
+        m_TargetAssemblyTypeName: PlayCards, Assembly-CSharp
+        m_MethodName: ChoseWhereToPlay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

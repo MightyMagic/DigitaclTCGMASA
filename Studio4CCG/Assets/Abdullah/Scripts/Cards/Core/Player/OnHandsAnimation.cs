@@ -13,40 +13,31 @@ public class OnHandsAnimation : MonoBehaviour
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit) && hit.collider != null && hit.collider.tag == "OnHands")
         {
-            if (hit.collider != null && hit.collider.tag == "OnHands")
+            if (firsttimeSelected == true)
             {
-                if (firsttimeSelected == true)
-                {
 
-                    firsttimeSelected = false;
-                    selected = hit.collider.transform;
-                    selected.parent.GetComponent<Animator>().SetInteger("hover", 1);
+                firsttimeSelected = false;
+                selected = hit.collider.transform;
+                active = selected;
+                selected.parent.GetComponent<Animator>().SetInteger("hover", 1);
+                deselect = selected;
+            }
+            else
+            {
+
+                selected = hit.collider.transform;
+                selected.parent.GetComponent<Animator>().SetInteger("hover", 1);
+
+                if (selected != deselect)
+                {
+                    deselect.parent.GetComponent<Animator>().SetInteger("hover", 0);
                     deselect = selected;
                 }
-                else 
-                {
-
-                    selected = hit.collider.transform;
-                    selected.parent.GetComponent<Animator>().SetInteger("hover", 1);
-
-                    if (selected != deselect)
-                    {
-                        deselect.parent.GetComponent<Animator>().SetInteger("hover", 0);
-                        deselect = selected;
-                    }
-                }
-
-
-
-
-
-
-
 
             }
-
+        
 
         }
 
@@ -73,8 +64,10 @@ public class OnHandsAnimation : MonoBehaviour
             }
             else
             {
-                    active.parent.GetComponent<Animator>().SetBool("isSelected", false);
+                active.parent.GetComponent<Animator>().SetBool("isSelected", false);    
                 active.parent.GetComponent<Animator>().SetInteger("hover", 0);
+                deselect.parent.GetComponent<Animator>().SetInteger("hover", 0);
+                selected.parent.GetComponent<Animator>().SetInteger("hover", 0);
 
 
 
@@ -82,5 +75,9 @@ public class OnHandsAnimation : MonoBehaviour
             }
 
         }
+    
+    
     }
+
+
 }
