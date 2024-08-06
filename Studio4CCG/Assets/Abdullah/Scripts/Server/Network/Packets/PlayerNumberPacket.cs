@@ -12,7 +12,7 @@ public class PlayerNumberPacket : BasePackt
     }
     //data I want to modifiy in Function. 
     public PlayerNumberPacket(int playerOrder) :
-        base(PacketType.SceneTransitionPacket)
+        base(PacketType.PlayerNumberPacket)
     {
         //modify the variables
         PlayerOrder = playerOrder;

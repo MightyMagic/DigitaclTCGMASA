@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class MyServer : MonoBehaviour
@@ -10,8 +9,18 @@ public class MyServer : MonoBehaviour
     Socket serverSocket;
     public List<Socket> clients = new List<Socket>();
     int orderingplayer;
+    public static MyServer instance;
 
+    private void Awake()
+    {
+    if (instance == null)
+            {
+                instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else { Destroy(gameObject); }
 
+    }
     void Start()
     {
         //server socket starting point
@@ -56,28 +65,23 @@ public class MyServer : MonoBehaviour
                 try
                 {
 
-                    byte[] buffer = new byte[clients[i].Available];
+                byte[] buffer = new byte[clients[i].Available];
                     clients[i].Receive(buffer);
+
+
+
+
+
                 int bufferOffset = 0;
                 int curretBuffersize = buffer.Length;
 
                 BasePackt basePackt = new BasePackt().DeSerialize(buffer, bufferOffset);
-                
-
-                
-
-
 
                 // we don't send back the same data again from where we recieve it.
                 for (int j = 0; clients.Count > j; j++)
                     {
-                    
-                    /*                    if (i == j) 
-                                            {
-                                                continue; 
-                                            }
-                    */
-/*                    if (basePackt.Type == BasePackt.PacketType.FirstToPlayPacket)
+
+                    if (basePackt!=null && basePackt.Type == BasePackt.PacketType.FirstToPlayPacket)
                     {
                         if (i == 0)
                         {
@@ -89,30 +93,29 @@ public class MyServer : MonoBehaviour
                             Debug.Log("I'm player2");
 
                             FirstToPlayPacket firstToPlayPacket = new FirstToPlayPacket().DeSerialize(buffer, bufferOffset);
-                            clients[i].Send(new FirstToPlayPacket(firstToPlayPacket.PlayerID, firstToPlayPacket.FirstToPlay, 1).Serialize());
+                            clients[i].Send(new FirstToPlayPacket(firstToPlayPacket.FirstToPlay, firstToPlayPacket.PlayerCount).Serialize());
 
 
                         }
 
                     }
-*/                    
-
+                    else {
+                        Debug.Log("I'm sending a data");
                     clients[i].Send(buffer.ToArray());
                     }
 
                 }
+
+            }
 
                 catch 
                 { 
                 
                 }
 
-
-
-
-
-
             }
+
+
     }
     
     //player 1

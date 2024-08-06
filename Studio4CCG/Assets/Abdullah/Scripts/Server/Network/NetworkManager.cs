@@ -21,7 +21,6 @@ public class NetworkManager : MonoBehaviour
     string playerName;
     public bool isFirst = false;
 
-    [HideInInspector]
     public int playerOrder;
     private void Awake()
     {
@@ -101,6 +100,7 @@ public class NetworkManager : MonoBehaviour
                         break;
                     case BasePackt.PacketType.SceneTransitionPacket:
                         SceneTransitionPacket switchScene = new SceneTransitionPacket().DeSerialize(buffer, bufferOffset);
+
                         SceneManager.LoadScene(switchScene.SceneName);
 
                         break;
@@ -124,7 +124,16 @@ public class NetworkManager : MonoBehaviour
                         PlayerNumberPacket playerNumberPacket = new PlayerNumberPacket().DeSerialize(buffer, bufferOffset);
                         playerOrder= playerNumberPacket.PlayerOrder;
 
+
                         break;
+
+                    case BasePackt.PacketType.FirstToPlayPacket:
+                        FirstToPlayPacket firstToPlayPacket = new FirstToPlayPacket().DeSerialize(buffer, bufferOffset);
+
+                        isFirst = firstToPlayPacket.FirstToPlay;
+
+                        break;
+
 
 
 

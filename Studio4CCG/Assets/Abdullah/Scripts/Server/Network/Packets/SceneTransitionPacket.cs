@@ -9,7 +9,7 @@ public class SceneTransitionPacket : BasePackt
     public SceneTransitionPacket()
     {
         //define variables
-        SceneName = "";
+        SceneName ="";
 
 
     }
@@ -17,7 +17,7 @@ public class SceneTransitionPacket : BasePackt
     public SceneTransitionPacket(string sceneName) :
         base(PacketType.SceneTransitionPacket)
     {
-        //
+        
         SceneName = sceneName;
     }
 
