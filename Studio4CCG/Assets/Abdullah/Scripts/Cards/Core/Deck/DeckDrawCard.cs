@@ -8,22 +8,25 @@ public class DeckDrawCard : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-         deck = gameObject.GetComponent<Deck>();
+        deck = gameObject.GetComponent<Deck>();
         hand= FindAnyObjectByType<Hands>();
-
     }
 
     public void DrawCard()
     {
-        if (deck.myCards.Count==0) {
+        if (deck.myCards.Count==0) 
+        {
 
+            
             //update the server I losted.
-
             Debug.Log("no more cards");
-                }
+
+        }
         else
         {
             //send it to hand
+            //Instantiate(newCard);
+
             deck.myCards[0].transform.parent = hand.transform;
             hand.cardsOnHand.Add(deck.myCards[0]);
             hand.cardsOnHand[0].gameObject.GetComponent<BaseCard>().UpdateCardState(CardState.hand);
@@ -32,6 +35,9 @@ public class DeckDrawCard : MonoBehaviour
             Debug.Log("I removed " + deck.myCards[0].name);
             deck.myCards.Remove(deck.myCards[0]);
             //update the server I draw
+
+
+
         }
     }
 }

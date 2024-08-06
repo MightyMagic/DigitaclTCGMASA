@@ -6,16 +6,23 @@ using System.Net.Sockets;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 
 public class NetworkManager : MonoBehaviour
 {
     public static NetworkManager instance;
-    public string networkID;
-    public TextMeshProUGUI textUI;
+    
+    string randmizeID = "1234567890qwertyuiop[]asdfghjklzxcvbnm";
+    public string playerID;
     Socket playerSocket;
     float timer;
 
+    string playerName;
+    public bool isFirst = false;
 
+    [HideInInspector]
+    public int playerOrder;
     private void Awake()
     {
         if(instance == null)
@@ -28,6 +35,10 @@ public class NetworkManager : MonoBehaviour
                                     AddressFamily.InterNetwork,
                                     SocketType.Stream,
                                     ProtocolType.Tcp);
+            for (int i = 0; i < 24; i++)
+            {
+                playerID += randmizeID[Random.Range(0, randmizeID.Length)];
+            }
 
         }
         else
@@ -40,7 +51,6 @@ public class NetworkManager : MonoBehaviour
     }
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -84,23 +94,40 @@ public class NetworkManager : MonoBehaviour
                 //execute logic based the type of the packet
                 switch (basePackt.Type)
                 {
-                    case BasePackt.PacketType.TestText:
-                        TestTextPacket textPacket = new TestTextPacket().DeSerialize(buffer, bufferOffset);
-                        textUI.text = textPacket.Text;
 
+                    case BasePackt.PacketType.PositionPacket:
+                        break;
+                    case BasePackt.PacketType.InstantiatePacket:
+                        break;
+                    case BasePackt.PacketType.SceneTransitionPacket:
+                        SceneTransitionPacket switchScene = new SceneTransitionPacket().DeSerialize(buffer, bufferOffset);
+                        SceneManager.LoadScene(switchScene.SceneName);
 
                         break;
-                        /*                    case BasePackt.PacketType.None:
-                                                break;
-                                            case BasePackt.PacketType.None:
-                                                break;
-                                            case BasePackt.PacketType.None:
-                                                break;
-                                            case BasePackt.PacketType.None:
-                                                break;
-                                            case BasePackt.PacketType.None:
-                                                break;
-                        */
+                    case BasePackt.PacketType.AnimationPacket:
+                        break;
+                    case BasePackt.PacketType.OwnershipPacket:
+                        OwnershipPacket ownershipPacket = new OwnershipPacket().DeSerialize(buffer,bufferOffset);
+                        BaseCard[] cards = FindObjectsOfType<BaseCard>();
+                        foreach (BaseCard card in cards)
+                        {
+                            if (card._ownerID == ownershipPacket.currentCardID)
+                            {
+                                card._ownerID = ownershipPacket.newOwner;
+                                break;
+                            }
+                            
+                        }
+                        break;
+
+                    case BasePackt.PacketType.PlayerNumberPacket:
+                        PlayerNumberPacket playerNumberPacket = new PlayerNumberPacket().DeSerialize(buffer, bufferOffset);
+                        playerOrder= playerNumberPacket.PlayerOrder;
+
+                        break;
+
+
+
                 }
 
             }
@@ -122,8 +149,6 @@ public class NetworkManager : MonoBehaviour
 
         playerSocket.Send(buffer);
 
-        string data = Encoding.ASCII.GetString(buffer);
-        Debug.Log(data);
     }
     //button
     public void OnConnectedToServer()

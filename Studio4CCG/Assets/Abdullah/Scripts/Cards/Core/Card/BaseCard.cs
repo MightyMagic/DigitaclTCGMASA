@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BaseCard : MonoBehaviour
@@ -7,8 +8,8 @@ public class BaseCard : MonoBehaviour
     [Header("Card info")]
     [SerializeField] string cardID;
     [SerializeField] CreatureTypeList creatureType;
-   // [SerializeField] bool targetable = true;
-
+    // [SerializeField] bool targetable = true;
+     
     [SerializeField] int health = 0;
     [SerializeField] int defense = 0;
     [SerializeField] int attack=0;
@@ -23,6 +24,9 @@ public class BaseCard : MonoBehaviour
 
     //for generating ID
     string characters = "zxcvbnmasdfghjklqwertyuiop1234567890";
+    
+    [HideInInspector]
+    public string _ownerID;
     private void Awake()
     {
 
@@ -31,6 +35,13 @@ public class BaseCard : MonoBehaviour
             cardID += characters[Random.Range(0, characters.Length)];
         }
        
+    }
+    public void SetOwnership(string ownerID)
+    {
+        _ownerID=ownerID;
+        //update the server
+        NetworkManager.instance.SendData(new TestTextPacket("data").Serialize());
+
     }
     public int EffectStats(int value, StatesList enumValue)
     {

@@ -9,6 +9,7 @@ TagManager:
   - Button
   - Deck
   - OnTile
+  - Draw
   layers:
   - Default
   - TransparentFX

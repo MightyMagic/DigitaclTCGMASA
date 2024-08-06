@@ -46,14 +46,11 @@ public class HoverInteraction : MonoBehaviour
                         selected = hit.collider.transform;
                         selected.GetComponent<ParticleSystem>().Play();
                         deselect.GetComponent<ParticleSystem>().Stop();
-                        Debug.Log("selected+++" + selected.name);
-                        Debug.Log("stopped---"+ deselect.name);
                         deselect = selected;
 
                     }
                     else if(isFirst && hit.collider.transform.tag == "Tile" || hit.collider.transform.tag == "Deck")
                     {
-                        Debug.Log("First time");
                         timer = 0;
                         deselect = hit.collider.transform;
                         isFirst = false;

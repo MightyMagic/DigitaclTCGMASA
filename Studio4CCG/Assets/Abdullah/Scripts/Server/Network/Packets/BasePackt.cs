@@ -11,11 +11,27 @@ public class BasePackt
         None,
         PositionPacket,
         InstantiatePacket,
-        DestroyPacket,
         SceneTransitionPacket,
-        HeartbeatPacket,
+
+        DrawCardPacket,
         AnimationPacket,
+
+        CardStatePacket,
+        CardStatsPacket,
+
+        RequestActivatePacket,
+        MoveForwardPacket,
+        SwitchTilePacket,
+        DamageHealthPacket,
+        DamageManaPacket,
+
+        OwnershipPacket,
+        FirstToPlayPacket,
+        PlayerNumberPacket,
+
         TestText,
+        
+
     }
     public int PacketSize { get; private set; }
     public PacketType Type { get; private set; }

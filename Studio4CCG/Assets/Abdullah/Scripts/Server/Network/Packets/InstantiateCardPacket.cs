@@ -14,7 +14,6 @@ public class InstantiateCardPacket : BasePackt
         PrefabName = "";
         Position = Vector3.zero;
         Rotation = Quaternion.identity;
-
     }
 
 
@@ -24,6 +23,8 @@ public class InstantiateCardPacket : BasePackt
         PrefabName = prefab;
         Position = position;
         Rotation = rotation;
+
+        // position above the deck
 
     }
 
@@ -54,6 +55,27 @@ public class InstantiateCardPacket : BasePackt
         return EndSerSerialize();
     }
 
+    public new InstantiateCardPacket DeSerialize(byte[] buffer, int bufferOffset)
+    {
+        base.DeSerialize(buffer, bufferOffset);
+
+        binaryWriter.Write(PrefabName);
+
+        //it position. 
+        //Maybe based on the tile position ?
+        //later
+        binaryWriter.Write(Position.x);
+        binaryWriter.Write(Position.y);
+        binaryWriter.Write(Position.z);
+
+        //it rotation
+        binaryWriter.Write(Rotation.x);
+        binaryWriter.Write(Rotation.y);
+        binaryWriter.Write(Rotation.z);
+        binaryWriter.Write(Rotation.w);
+
+        return this;
+    }
 
 
 }

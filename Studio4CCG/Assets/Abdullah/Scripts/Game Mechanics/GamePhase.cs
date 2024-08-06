@@ -1,44 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GamePhase : MonoBehaviour
 {
     //[HideInInspector]
     public bool myTurn;
-
-
+    public TextMeshProUGUI phaseUI;
+    public Animator screenUIAnimator;
+    DeckDrawCard deckDrawCard;
     // Update is called once per frame
+
+    private void Start()
+    {
+        deckDrawCard = GameObject.FindAnyObjectByType<DeckDrawCard>();
+    }
     void Update()
     {
         
     }
 
-    void DrawPhase()
+    public void DrawPhase()
     {
-        //Draw
-        PlayPhase();
+        GameManager.Instance.DrawPhase();
+
+
     }
-    void PlayPhase()
+    public void PlayPhase()
     {
-        // Start Timer 
-        // UI indecation
-        //Notify The server 
+
+        GameManager.Instance.PlayPhase();
 
     }
     public void AttackPhase()
     {
 
-        //UI indecation
-        //Notify The server 
+        GameManager.Instance.AttackPhase();
+
     }
     public void EndTurn()
     {
-        myTurn = false;
-        //Disable Playing Cards. only interactions.
-        //Notify The server 
-        //Reset timer.
-
+        GameManager.Instance.EndTurn();
     }
 
 
