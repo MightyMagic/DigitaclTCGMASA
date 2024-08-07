@@ -81,7 +81,7 @@ public class NetworkManager : MonoBehaviour
                     break;
 
                 }
-                    
+
                 //All data inhert from basePacket.
                 BasePackt basePackt = new BasePackt().DeSerialize(buffer, bufferOffset);
                 //set the value back to zero
@@ -107,7 +107,7 @@ public class NetworkManager : MonoBehaviour
                     case BasePackt.PacketType.AnimationPacket:
                         break;
                     case BasePackt.PacketType.OwnershipPacket:
-                        OwnershipPacket ownershipPacket = new OwnershipPacket().DeSerialize(buffer,bufferOffset);
+                        OwnershipPacket ownershipPacket = new OwnershipPacket().DeSerialize(buffer, bufferOffset);
                         BaseCard[] cards = FindObjectsOfType<BaseCard>();
                         foreach (BaseCard card in cards)
                         {
@@ -116,13 +116,13 @@ public class NetworkManager : MonoBehaviour
                                 card._ownerID = ownershipPacket.newOwner;
                                 break;
                             }
-                            
+
                         }
                         break;
 
                     case BasePackt.PacketType.PlayerNumberPacket:
                         PlayerNumberPacket playerNumberPacket = new PlayerNumberPacket().DeSerialize(buffer, bufferOffset);
-                        playerOrder= playerNumberPacket.PlayerOrder;
+                        playerOrder = playerNumberPacket.PlayerOrder;
 
 
                         break;
@@ -131,6 +131,18 @@ public class NetworkManager : MonoBehaviour
                         FirstToPlayPacket firstToPlayPacket = new FirstToPlayPacket().DeSerialize(buffer, bufferOffset);
 
                         isFirst = firstToPlayPacket.FirstToPlay;
+
+                        break;
+
+
+
+
+
+                    case BasePackt.PacketType.TestText:
+                        TestTextPacket testTextPacket = new TestTextPacket
+                            ().DeSerialize(buffer, bufferOffset);
+                        TextMeshProUGUI ui = GameObject.Find(testTextPacket.Name).GetComponent<TextMeshProUGUI>();
+                        ui.text= testTextPacket.Text;
 
                         break;
 
@@ -162,7 +174,7 @@ public class NetworkManager : MonoBehaviour
     //button
     public void OnConnectedToServer()
     {
-        playerSocket.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 3000));
+        playerSocket.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 50000));
         playerSocket.Blocking = false;
         Debug.Log("Connecting...");
     }
