@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerDrawing : MonoBehaviour
 {
-    [HideInInspector]
     public int drawCount;
     // Start is called before the first frame update
     DeckDrawCard drawCard;

@@ -15,6 +15,7 @@ public class MyServer : MonoBehaviour
 
     int orderingplayer;
     public static MyServer instance;
+    Thread mainThread;
     Thread serverTCP;
     Thread serverUDP;
     public bool serverIsRunning;
@@ -24,6 +25,8 @@ public class MyServer : MonoBehaviour
             {
                 instance = this;
             DontDestroyOnLoad(gameObject);
+            mainThread = Thread.CurrentThread;
+
         }
         else { Destroy(gameObject); }
 
@@ -45,10 +48,8 @@ public class MyServer : MonoBehaviour
         serverSocketTCP.Bind(new IPEndPoint(IPAddress.Any, 50000));
         serverSocketTCP.Listen(0);
         serverSocketTCP.Blocking = false;
-        Debug.Log("connected to TCP");
         serverTCP = new Thread(() => RunTCPServer());
         serverTCP.Start();
-        Debug.Log("Started TCP Server");
     }
     private void ListenForClientsUDP()
     {
@@ -57,12 +58,10 @@ public class MyServer : MonoBehaviour
         //socket end point. 
         serverSocketUDP.Bind(new IPEndPoint(IPAddress.Any, 3000));
         serverSocketUDP.Blocking = false;
-        Debug.Log("connected to UDP");
 
 
         serverUDP = new Thread(() => RunUDPServer());
         serverUDP.Start();
-        Debug.Log("Started UDP Server");
     }
 
 
@@ -80,7 +79,6 @@ public class MyServer : MonoBehaviour
             try
             {
                 clientsTCP.Add(serverSocketTCP.Accept());
-                Debug.Log("I added someone");
                 clientsTCP[orderingplayer].Send(new PlayerNumberPacket(orderingplayer).Serialize());
                 orderingplayer++;
             }
@@ -91,7 +89,6 @@ public class MyServer : MonoBehaviour
 
             for (int i = 0; clientsTCP.Count > i; i++)
             {
-                Debug.Log(i);
 
                 try
                 {
@@ -108,32 +105,33 @@ public class MyServer : MonoBehaviour
 
                     BasePackt basePackt = new BasePackt().DeSerialize(buffer, bufferOffset);
 
-                    // we don't send back the same data again from where we recieve it.
                     for (int j = 0; clientsTCP.Count > j; j++)
                     {
 
-                        if (basePackt != null && basePackt.Type == BasePackt.PacketType.FirstToPlayPacket)
+                        if (basePackt != null && basePackt.Type == BasePackt.PacketType.SceneTransitionPacket)
                         {
-                            if (i == 0)
-                            {
-                                Debug.Log("I'm player1");
-                                clientsTCP[i].Send(buffer.ToArray());
+                            Debug.Log("Switch Scene");
+                            clientsTCP[j].Send(buffer.ToArray());
+                        }
+                        else if (basePackt != null && basePackt.Type == BasePackt.PacketType.FirstToPlayPacket)
+                        {
+                            FirstToPlayPacket firstToPlayPacket = new FirstToPlayPacket().DeSerialize(buffer, bufferOffset);
+                            if (firstToPlayPacket.PlayerCount == j) 
+                            { 
+                            Debug.Log("Server player"+ firstToPlayPacket.PlayerCount);
+                            Debug.Log("Server First to play=" + firstToPlayPacket.FirstToPlay);
+                            clientsTCP[j].Send(buffer.ToArray());
                             }
-                            else
-                            {
-                                Debug.Log("I'm player2");
 
-                                FirstToPlayPacket firstToPlayPacket = new FirstToPlayPacket().DeSerialize(buffer, bufferOffset);
-                                clientsTCP[i].Send(new FirstToPlayPacket(firstToPlayPacket.FirstToPlay, firstToPlayPacket.PlayerCount).Serialize());
-
-
-                            }
 
                         }
+
+                        // we don't send back the same data again from where we recieve it.
                         else
                         {
+                            if (j==i)continue;
                             Debug.Log("I'm sending a data to client" + i);
-                            clientsTCP[i].Send(buffer.ToArray());
+                            clientsTCP[j].Send(buffer.ToArray());
                         }
 
                     }

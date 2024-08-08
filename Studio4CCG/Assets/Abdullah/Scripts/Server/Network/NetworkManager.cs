@@ -63,7 +63,6 @@ public class NetworkManager : MonoBehaviour
         {
             byte[] buffer = new byte[playerSocket.Available];
             playerSocket.Receive(buffer);
-            Debug.Log("I receieved data");
 
             //data position in the buffer;
             int bufferOffset = 0;
@@ -130,7 +129,20 @@ public class NetworkManager : MonoBehaviour
                     case BasePackt.PacketType.FirstToPlayPacket:
                         FirstToPlayPacket firstToPlayPacket = new FirstToPlayPacket().DeSerialize(buffer, bufferOffset);
 
-                        isFirst = firstToPlayPacket.FirstToPlay;
+                        //make sure not overWrite isFirst with the wrong one.
+                        if (0 == firstToPlayPacket.PlayerCount)
+                        {
+                            isFirst = firstToPlayPacket.FirstToPlay;
+                            Debug.LogError("-----player " + firstToPlayPacket.PlayerCount + " is ---" + firstToPlayPacket.FirstToPlay);
+
+
+                        }
+                        else if (1== firstToPlayPacket.PlayerCount)
+                        {
+                            isFirst = firstToPlayPacket.FirstToPlay;
+                            Debug.LogError("-----else player " + firstToPlayPacket.PlayerCount + " is ---" + firstToPlayPacket.FirstToPlay);
+
+                        }
 
                         break;
 

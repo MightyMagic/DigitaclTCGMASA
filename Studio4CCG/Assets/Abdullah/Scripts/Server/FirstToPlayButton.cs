@@ -8,48 +8,74 @@ public class FirstToPlayButton : MonoBehaviour
     // Start is called before the first frame update
 
     [Range(1, 2)]
-    int playerNumber = 0;
     string ownerID;
-    Toggle toggle;
+    public Image checkMark;
+    int orderToPlay;
     private void Start()
     {
         ownerID = NetworkManager.instance.playerID;
-        toggle = GetComponent<Toggle>();
     }
-
-    public void ChangeFirst()
+    private void Update()
     {
-        int orderToPlay = NetworkManager.instance.playerOrder;
-        bool isFirst = NetworkManager.instance.isFirst;
-        if (playerNumber == orderToPlay)
+        if (NetworkManager.instance.isFirst == true)
         {
-
-            ownerID = NetworkManager.instance.playerID;
-            NetworkManager.instance.SendData(new FirstToPlayPacket(isFirst, 0).Serialize());
-            try
-            {
-                NetworkManager.instance.SendData(new FirstToPlayPacket(!isFirst, 1).Serialize());
-            }
-            catch { Debug.LogError("no second player"); }
-            Debug.Log("I'm player one");
-
+            checkMark.enabled = true;
         }
         else
         {
 
-            ownerID = NetworkManager.instance.playerID;
-            NetworkManager.instance.SendData(new FirstToPlayPacket(!isFirst, 0).Serialize());
+            checkMark.enabled = false;
+        }
+
+
+    }
+    public void ChangeFirst()
+    {
+
+        //player1 
+        //0 == 0
+        //0=true
+        //1=false
+
+        //1!=0
+        //0=false
+        //1=true
+        ownerID = NetworkManager.instance.playerID;
+        //send true for first player
+        //false for second
+        NetworkManager.instance.isFirst = true;
+            orderToPlay = NetworkManager.instance.playerOrder;
+
+        if (orderToPlay == 0)
+        {
+            NetworkManager.instance.isFirst=true;
+            NetworkManager.instance.SendData(new FirstToPlayPacket(true, 0).Serialize());
+
             try
             {
-                NetworkManager.instance.SendData(new FirstToPlayPacket(isFirst, 1).Serialize());
+                NetworkManager.instance.SendData(new FirstToPlayPacket(false, 1).Serialize());
             }
-            catch { Debug.LogError("no second player"); }
+            catch { }
+        }
+        else
+        {
+            NetworkManager.instance.SendData(new FirstToPlayPacket(true, 1).Serialize());
+            Debug.LogWarning(NetworkManager.instance.isFirst);
+            try
+            {
 
-            Debug.Log("I'm player two");
+                NetworkManager.instance.SendData(new FirstToPlayPacket(false, 0).Serialize());
+
+            }
+            catch
+            {
+                Debug.LogError("no second player");
+            }
 
         }
 
     }
+
 
 
 }

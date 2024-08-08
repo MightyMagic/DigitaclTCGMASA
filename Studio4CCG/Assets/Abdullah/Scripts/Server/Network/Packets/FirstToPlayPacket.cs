@@ -29,11 +29,10 @@ public class FirstToPlayPacket : BasePackt
         BeginSerialize();
 
         // my data goes here.
-        binaryWriter.Write(PlayerCount);
         binaryWriter.Write(FirstToPlay);
+        binaryWriter.Write(PlayerCount);
 
-
-             // my data goes here.
+        // my data goes here.
 
         return EndSerSerialize();
     }
@@ -42,8 +41,8 @@ public class FirstToPlayPacket : BasePackt
     {
         base.DeSerialize(buffer, bufferOffset);
         // Read in the same order as it was serialized.
-        PlayerCount= binaryReader.ReadInt32();
         FirstToPlay = binaryReader.ReadBoolean();
+        PlayerCount = binaryReader.ReadInt32();
 
         //Read in the same order as it was serialized
 

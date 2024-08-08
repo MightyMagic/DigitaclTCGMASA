@@ -336,6 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e889bc223240dd42ae1c8cd683ad1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkMark: {fileID: 1019929754}
 --- !u!114 &135444535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,7 +379,7 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 754157028}
   toggleTransition: 1
-  graphic: {fileID: 1019929754}
+  graphic: {fileID: 0}
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
@@ -395,7 +396,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!224 &135444536
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2643,7 +2644,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Play is First
+  m_Text: Player 1 is First
 --- !u!222 &1338518166
 CanvasRenderer:
   m_ObjectHideFlags: 0

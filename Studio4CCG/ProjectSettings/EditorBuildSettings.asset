@@ -9,15 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/ServerScene.unity
     guid: 52700f4ef99fb71469df9341ba74cbd9
   - enabled: 1
-    path: Assets/Abdullah/Scenes/Texting.unity
-    guid: c4011fafe2222ce49aeb616abdc92d3b
-  - enabled: 0
     path: Assets/Scenes/Main Menu.unity
     guid: 0c3bc188618bb054a99512b733bfb25b
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Abdullah/Scenes/Texting.unity
+    guid: c4011fafe2222ce49aeb616abdc92d3b
+  - enabled: 1
     path: Assets/Scenes/Host Room.unity
     guid: a741e911abe687943abb2ddd135d46cf
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/PlayerScene.unity
     guid: ab5e5373255e82b4fb3544cef3506d40
   m_configObjects: {}
