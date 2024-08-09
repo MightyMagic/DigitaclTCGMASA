@@ -150,13 +150,13 @@ public class NetworkManager : MonoBehaviour
 
 
 
-                    case BasePackt.PacketType.TestText:
-                        TestTextPacket testTextPacket = new TestTextPacket
-                            ().DeSerialize(buffer, bufferOffset);
-                        TextMeshProUGUI ui = GameObject.Find(testTextPacket.Name).GetComponent<TextMeshProUGUI>();
-                        ui.text= testTextPacket.Text;
-
-                        break;
+                    //case BasePackt.PacketType.TestText:
+                    //    TestTextPacket testTextPacket = new TestTextPacket
+                    //        ().DeSerialize(buffer, bufferOffset);
+                    //    TextMeshProUGUI ui = GameObject.Find(testTextPacket.Name).GetComponent<TextMeshProUGUI>();
+                    //    ui.text= testTextPacket.Text;
+                    //
+                    //    break;
 
 
 
