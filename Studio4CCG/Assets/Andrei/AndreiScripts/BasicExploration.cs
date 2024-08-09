@@ -2,49 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicExploration : MonoBehaviour
+namespace AndreiScripts
 {
-    [SerializeField] GameObject characterObject;
-    [SerializeField] GameObject cameraObject;
-
-    Vector3 initialPosition;
-
-    [SerializeField] Transform startCameraPos;
-    [SerializeField] Transform charCameraPosition;
-
-    void Start()
+    public class BasicExploration : MonoBehaviour
     {
-        HideCharacter();
-        //RevealCharacter();
-    }
+        [SerializeField] GameObject characterObject;
+        [SerializeField] GameObject cameraObject;
 
-    void Update()
-    {
-        
-    }
+        Vector3 initialPosition;
 
-    public void RevealCharacter()
-    {
-        characterObject.SetActive(true);
+        [SerializeField] Transform startCameraPos;
+        [SerializeField] Transform charCameraPosition;
 
-       cameraObject.gameObject.SetActive(true);
+        void Start()
+        {
+            HideCharacter();
+            //RevealCharacter();
+        }
 
-       cameraObject.transform.position = charCameraPosition.position;
-       cameraObject.transform.rotation = charCameraPosition.rotation;
+        void Update()
+        {
 
-       cameraObject.transform.parent = charCameraPosition;
+        }
 
-        characterObject.transform.position = initialPosition;
-    }
+        public void RevealCharacter()
+        {
+            characterObject.SetActive(true);
 
-    public void HideCharacter()
-    {
-        characterObject.SetActive(false);
-        cameraObject.gameObject.SetActive(true);
-        
-        cameraObject.transform.position = startCameraPos.position;
-        cameraObject.transform.rotation = startCameraPos.rotation;
-        
-        cameraObject.transform.parent = startCameraPos;
+            cameraObject.gameObject.SetActive(true);
+
+            cameraObject.transform.position = charCameraPosition.position;
+            cameraObject.transform.rotation = charCameraPosition.rotation;
+
+            cameraObject.transform.parent = charCameraPosition;
+
+            characterObject.transform.position = initialPosition;
+        }
+
+        public void HideCharacter()
+        {
+            characterObject.SetActive(false);
+            cameraObject.gameObject.SetActive(true);
+
+            cameraObject.transform.position = startCameraPos.position;
+            cameraObject.transform.rotation = startCameraPos.rotation;
+
+            cameraObject.transform.parent = startCameraPos;
+        }
     }
 }
