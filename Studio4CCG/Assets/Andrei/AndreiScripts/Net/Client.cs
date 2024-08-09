@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using TMPro;
 using UnityEngine;
 
 public class Client : MonoBehaviour
 {
     Socket socket;
+    public TextMeshProUGUI debugText;
+    public List<TextMeshProUGUI> cardNames;
 
     void Start()
     {
@@ -33,11 +36,31 @@ public class Client : MonoBehaviour
                 byte[] buffer = new byte[socket.Available];
                 socket.Receive(buffer);
 
-                PositionPacket ps = new PositionPacket();
-                ps.Deserialize(buffer);
-                Debug.Log("Id: " + ps.playerData.ID);
-                Debug.Log("Name: " + ps.playerData.Name);
-                Debug.Log(ps.Position.x + " " +  ps.Position.y + " " + ps.Position.z);
+                debugText.text = "Receiving the package of size " + buffer.Length;
+                //Debug.Log("Receiving the package of size " + buffer.Length);
+
+                BoardPacket bp = new BoardPacket();
+                bp.Deserialize(buffer, 0);
+
+                for(int i = 0; i < bp.currentBoard.boardObjects.Count; i++)
+                {
+                    debugText.text += bp.currentBoard.boardObjects[i].cardName + " , ";
+                }
+
+
+
+                for (int i = 0; i < bp.currentBoard.boardObjects.Count; i++)
+                {
+                    cardNames[i].text = "Client Card " + i + ": " + bp.currentBoard.boardObjects[i].cardName;
+                }
+
+
+
+                //PositionPacket ps = new PositionPacket();
+                ////ps.Deserialize(buffer);
+                //Debug.Log("Id: " + ps.playerData.ID);
+                //Debug.Log("Name: " + ps.playerData.Name);
+                //Debug.Log(ps.Position.x + " " +  ps.Position.y + " " + ps.Position.z);
             }
             catch
             {
