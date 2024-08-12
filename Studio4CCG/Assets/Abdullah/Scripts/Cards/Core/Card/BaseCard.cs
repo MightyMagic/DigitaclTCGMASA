@@ -40,7 +40,7 @@ public class BaseCard : MonoBehaviour
     {
         _ownerID=ownerID;
         //update the server
-        NetworkManager.instance.SendData(new TestTextPacket("data").Serialize());
+      //  NetworkManager.instance.SendData(new TestTextPacket("data").Serialize());
 
     }
     public int EffectStats(int value, StatesList enumValue)

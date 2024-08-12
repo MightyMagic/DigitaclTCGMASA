@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayCards : MonoBehaviour
 {
     bool isPlayable = false;
-    LayerMask tileMask=6;
     public TileList tileList;
+    float timer = 2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,16 +19,27 @@ public class PlayCards : MonoBehaviour
     }
     void Update()
     {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hit;
         // Playable & Mouse Clicked.
         if (isPlayable && Input.GetKeyUp(KeyCode.Mouse0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            Debug.Log("Step1");
 
-            if (Physics.Raycast(ray, out hit, 20, tileMask))
+            LayerMask tileMask = LayerMask.GetMask("Tile");
+
+            if (Physics.Raycast(ray, out hit,Mathf.Infinity, tileMask) && hit.transform.GetComponent<TileNode>().occupieState==TileNode.OccupieState.empty)
             {
+                Debug.Log("Step2");
+
+                //Update Card Tag
+                transform.tag = "Tile";
+                transform.GetChild(0).gameObject.tag = "Tile";
+                PlayMe(hit.collider.transform);
+
+                //prevent the button from being triggered randomly
                 isPlayable = false;
-                PlayMe();
                 //disable the effect.
             }
             else
@@ -56,7 +69,7 @@ public class PlayCards : MonoBehaviour
 
 
 
-
+    //OnHand Card Button.
     public void ChoseWhereToPlay()
     {
         isPlayable =true;
@@ -79,18 +92,54 @@ public class PlayCards : MonoBehaviour
     }
 
     //chose a spot to play
-    public void PlayMe()
+    public void PlayMe(Transform hit)
     {
-        //if it's not tile give a feedback sound.
+        Debug.Log("play the card");
+
         // Move The Card To The Tile.
+        StartCoroutine(LerpToTile(hit));
 
         // Update The Tile.
+        hit.GetComponent<TileNode>().occupieState = TileNode.OccupieState.occupied;
 
+        //reset aniamtion.
+        transform.GetComponent<Animator>().SetBool("isSelected", false);
+        transform.GetComponent<Animator>().SetInteger("hover",0);
 
+        //reset
+        foreach (Transform tile in tileList.tileList)
+        {
+            TileNode tileNode = tile.GetComponent<TileNode>();
+            var mainModule = tile.GetComponent<ParticleSystem>().main;
+            tile.GetComponent<ParticleSystem>().Stop();
+            // Disable the loop
+            mainModule.loop = false;
 
+        }
 
     }
 
+    IEnumerator LerpToTile(Transform hit)
+    {
+        timer = 0.3f;
+        float currentTimer = timer;
+        Quaternion startRotation = transform.rotation;
+        while (currentTimer >= 0)
+        {
 
+            //lerp to tile
+            transform.position = Vector3.Lerp(hit.position, transform.position, currentTimer / timer);
 
+            //offset position above tile
+            transform.position = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
+
+            //lerp to tile rotation which is 0
+            transform.rotation = Quaternion.Lerp(Quaternion.identity, startRotation, 0.2f);
+
+            //countdown
+            currentTimer -= 1 * Time.deltaTime;
+            yield return null;
+        }
+
+    }
 }
