@@ -40,11 +40,13 @@ public class BasePackt
     public BasePackt()
     {
         Type = PacketType.None;
+        PacketSize = 0;
     }
     //recieving data
     public BasePackt(PacketType type)
     {
         Type = type;
+        PacketSize = 0;
     }
 
     protected MemoryStream writeMemory;

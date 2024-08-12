@@ -134,13 +134,15 @@ public class NetworkManager : MonoBehaviour
                         {
                             isFirst = firstToPlayPacket.FirstToPlay;
                             Debug.LogError("-----player " + firstToPlayPacket.PlayerCount + " is ---" + firstToPlayPacket.FirstToPlay);
-
+                            // I need to offset buffer to count for the packet otherwise it can cause problems. 
+                            bufferOffset += firstToPlayPacket.PacketSize;
 
                         }
                         else if (1== firstToPlayPacket.PlayerCount)
                         {
                             isFirst = firstToPlayPacket.FirstToPlay;
                             Debug.LogError("-----else player " + firstToPlayPacket.PlayerCount + " is ---" + firstToPlayPacket.FirstToPlay);
+                            bufferOffset += firstToPlayPacket.PacketSize;
 
                         }
 

@@ -49,28 +49,12 @@ public class FirstToPlayButton : MonoBehaviour
         if (orderToPlay == 0)
         {
             NetworkManager.instance.isFirst=true;
-            NetworkManager.instance.SendData(new FirstToPlayPacket(true, 0).Serialize());
-
-            try
-            {
-                NetworkManager.instance.SendData(new FirstToPlayPacket(false, 1).Serialize());
-            }
-            catch { }
+            NetworkManager.instance.SendData(new FirstToPlayPacket(false, 1).Serialize());
         }
         else
         {
-            NetworkManager.instance.SendData(new FirstToPlayPacket(true, 1).Serialize());
-            Debug.LogWarning(NetworkManager.instance.isFirst);
-            try
-            {
-
-                NetworkManager.instance.SendData(new FirstToPlayPacket(false, 0).Serialize());
-
-            }
-            catch
-            {
-                Debug.LogError("no second player");
-            }
+            NetworkManager.instance.isFirst = true;
+            NetworkManager.instance.SendData(new FirstToPlayPacket(false, 0).Serialize());
 
         }
 
