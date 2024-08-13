@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayCards : MonoBehaviour
 {
@@ -101,11 +98,11 @@ public class PlayCards : MonoBehaviour
 
         // Update The Tile.
         hit.GetComponent<TileNode>().occupieState = TileNode.OccupieState.occupied;
-
+        transform.transform.parent = tileList.transform.parent.transform;
         //reset aniamtion.
         transform.GetComponent<Animator>().SetBool("isSelected", false);
         transform.GetComponent<Animator>().SetInteger("hover",0);
-
+        GameManager.Instance.cardsOnHand.cardsOnHand.Remove(gameObject);
         //reset
         foreach (Transform tile in tileList.tileList)
         {

@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     //my playing deck carried from Hosted room.
-    DeckDrawCard deckDrawCard;
-    
-
+    [HideInInspector]
+    public DeckDrawCard deckDrawCard;
+    [HideInInspector]
+    public Hands cardsOnHand;
+    [HideInInspector]
+    public Deck deck;
 
     [Header("Timer")]
     public static GameManager Instance;
@@ -20,7 +24,7 @@ public class GameManager : MonoBehaviour
     [Range(0, 10)]
     public int maxMana;
     [HideInInspector]
-    public int mana;
+    public int mana=0;
     public TextMeshProUGUI manaUI;
 
     [HideInInspector]
@@ -31,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Phases")]
     //[HideInInspector]
-    public bool myTurn;
+    public bool myTurn= false;
     public TextMeshProUGUI phaseUI;
     public Animator screenUIAnimator;
 
@@ -53,27 +57,41 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         deckDrawCard = FindAnyObjectByType<DeckDrawCard>();
+        cardsOnHand = FindAnyObjectByType<Hands>();
+        deck = FindAnyObjectByType<Deck>();
+
         healthUI.text = "Health: " + maxHealth;
+        manaUI.text = "Mana: " + mana;
+
+        myTurn = NetworkManager.instance.isFirst;
+        DrawPhase();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timer <= 0)
+        if (!myTurn)
+        {
+            timerUI.text = "Timer:0";
+
+        }
+        else if (myTurn && timer <= 0)
         {
             timer = 0;
-
+            // end turn
+            EndTurn();
         }
         else
         {
 
             timer -= 1 * Time.deltaTime;
             timerUI.text = "Timer: " + timer.ToString("0");
-
-
         }
+
     }
+
+    
     public void UpdateHealth(int number)
     {
         health += number;
@@ -83,6 +101,8 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
+
     public void UpdateMana(int number)
     {
 
@@ -99,12 +119,6 @@ public class GameManager : MonoBehaviour
 
 
     //Phases
-    public void FirstRound()
-    {
-
-
-
-    }
     public void DrawPhase()
     {
         //Reset Timer
@@ -113,15 +127,16 @@ public class GameManager : MonoBehaviour
         // UI indecation
         screenUIAnimator.SetTrigger("NextPhase");
         phaseUI.text = "Draw Phase";
-        //Draw
-        //deckDrawCard.DrawCard();
 
-        //Reset Mana
-        mana = maxMana;
-        manaUI.text = "Mana: " + mana;
+        if (myTurn)
+        {
+            //Reset Mana
+            mana = maxMana;
+            manaUI.text = "Mana: " + mana;
+            //Draw 
+            deckDrawCard.DrawCard();
 
-        // PlayPhase();
-
+        }
 
     }
     public void PlayPhase()
@@ -148,6 +163,13 @@ public class GameManager : MonoBehaviour
         screenUIAnimator.SetTrigger("NextPhase");
         phaseUI.text = "Attack Phase";
 
+        //// Card Moveforawd    ///
+        ///  Card Interaction  ///
+        ///  Card Attack      ///
+        ///  Update cards    ///
+        ///  Update Health  ///
+        ///  Resolve Cards ///
+        ///  
         //Notify The server 
 
 
