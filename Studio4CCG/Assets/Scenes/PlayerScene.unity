@@ -154,16 +154,16 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 63403689}
-  - {fileID: 1462401045}
-  - {fileID: 1227735171}
   - {fileID: 1943653813}
-  - {fileID: 594305913}
-  - {fileID: 1946859582}
   - {fileID: 787551059}
-  - {fileID: 153420248}
-  - {fileID: 1910999585}
   - {fileID: 1419231820}
+  - {fileID: 1462401045}
+  - {fileID: 594305913}
+  - {fileID: 153420248}
   - {fileID: 1081187753}
+  - {fileID: 1227735171}
+  - {fileID: 1946859582}
+  - {fileID: 1910999585}
   - {fileID: 1224960197}
   m_Father: {fileID: 961768408}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -180,11 +180,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileList:
+  - {fileID: 63403689}
+  - {fileID: 1943653813}
   - {fileID: 787551059}
-  - {fileID: 153420248}
-  - {fileID: 1910999585}
   - {fileID: 1419231820}
+  - {fileID: 1462401045}
+  - {fileID: 594305913}
+  - {fileID: 153420248}
   - {fileID: 1081187753}
+  - {fileID: 1227735171}
+  - {fileID: 1946859582}
+  - {fileID: 1910999585}
   - {fileID: 1224960197}
 --- !u!1 &63403688
 GameObject:
@@ -285,6 +291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a2c1dcc06e7eb49b9c431bd6ed7107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTiles: 1
+  storCard: {fileID: 0}
   occupieState: 0
 --- !u!199 &63403694
 ParticleSystemRenderer:
@@ -5297,7 +5305,7 @@ GameObject:
   - component: {fileID: 153420253}
   - component: {fileID: 153420255}
   m_Layer: 6
-  m_Name: tile08
+  m_Name: tile07
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5380,6 +5388,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a2c1dcc06e7eb49b9c431bd6ed7107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTiles: 1
+  storCard: {fileID: 0}
   occupieState: 0
 --- !u!199 &153420253
 ParticleSystemRenderer:
@@ -11043,7 +11053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d1d049b370a6e45a029c66d3b3268a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawCount: 0
+  drawCount: 5
 --- !u!1 &300327200
 GameObject:
   m_ObjectHideFlags: 0
@@ -11673,6 +11683,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 472031084}
   m_CullTransparentMesh: 1
+--- !u!1 &498660855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 498660857}
+  - component: {fileID: 498660856}
+  m_Layer: 0
+  m_Name: Network (FOR TESTING)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &498660856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498660855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 876ee3c91a822624c82c4195ffd100ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerID: 
+  isFirst: 1
+  playerOrder: 0
+--- !u!4 &498660857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498660855}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.4141554, y: 0.8671961, z: -5.95}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &569595245
 GameObject:
   m_ObjectHideFlags: 0
@@ -11755,7 +11812,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1319146149}
   m_HandleRect: {fileID: 1319146148}
   m_Direction: 2
-  m_Value: 1.0000001
+  m_Value: 1
   m_Size: 0.30396897
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -11815,7 +11872,7 @@ GameObject:
   - component: {fileID: 594305918}
   - component: {fileID: 594305920}
   m_Layer: 6
-  m_Name: tile05
+  m_Name: tile06
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11898,6 +11955,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a2c1dcc06e7eb49b9c431bd6ed7107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTiles: 1
+  storCard: {fileID: 0}
   occupieState: 0
 --- !u!199 &594305918
 ParticleSystemRenderer:
@@ -17249,7 +17308,7 @@ GameObject:
   - component: {fileID: 787551064}
   - component: {fileID: 787551066}
   m_Layer: 6
-  m_Name: tile07
+  m_Name: tile03
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17332,6 +17391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a2c1dcc06e7eb49b9c431bd6ed7107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTiles: 1
+  storCard: {fileID: 0}
   occupieState: 0
 --- !u!199 &787551064
 ParticleSystemRenderer:
@@ -22460,6 +22521,74 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930093652}
   m_CullTransparentMesh: 1
+--- !u!1001 &948864329
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 443395593773510266, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 443395593773510266, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 443395593773510266, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 443395593773510266, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9548822
+      objectReference: {fileID: 0}
+    - target: {fileID: 443395593773510266, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.29078346
+      objectReference: {fileID: 0}
+    - target: {fileID: 443395593773510266, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.017587708
+      objectReference: {fileID: 0}
+    - target: {fileID: 443395593773510266, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.057754893
+      objectReference: {fileID: 0}
+    - target: {fileID: 443395593773510266, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 443395593773510266, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 443395593773510266, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420519997565074184, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
+      propertyPath: m_Name
+      value: Card
+      objectReference: {fileID: 0}
+    - target: {fileID: 8850254508837875747, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
+      propertyPath: m_Name
+      value: Card Name
+      objectReference: {fileID: 0}
+    - target: {fileID: 8850254508837875747, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
+      propertyPath: m_TagString
+      value: OnHands
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8850254508837875747, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1377411340}
+  m_SourcePrefab: {fileID: 100100000, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
 --- !u!1 &961768404
 GameObject:
   m_ObjectHideFlags: 0
@@ -23018,7 +23147,7 @@ GameObject:
   - component: {fileID: 1081187758}
   - component: {fileID: 1081187760}
   m_Layer: 6
-  m_Name: tile11
+  m_Name: tile08
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23101,6 +23230,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a2c1dcc06e7eb49b9c431bd6ed7107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTiles: 1
+  storCard: {fileID: 0}
   occupieState: 0
 --- !u!199 &1081187758
 ParticleSystemRenderer:
@@ -33343,6 +33474,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a2c1dcc06e7eb49b9c431bd6ed7107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTiles: 1
+  storCard: {fileID: 0}
   occupieState: 0
 --- !u!199 &1224960202
 ParticleSystemRenderer:
@@ -38187,7 +38320,7 @@ GameObject:
   - component: {fileID: 1227735176}
   - component: {fileID: 1227735178}
   m_Layer: 6
-  m_Name: tile03
+  m_Name: tile09
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38270,6 +38403,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a2c1dcc06e7eb49b9c431bd6ed7107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTiles: 1
+  storCard: {fileID: 0}
   occupieState: 0
 --- !u!199 &1227735176
 ParticleSystemRenderer:
@@ -43352,6 +43487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1363597288}
   - component: {fileID: 1363597290}
+  - component: {fileID: 1363597291}
   m_Layer: 0
   m_Name: GameManager-------
   m_TagString: Untagged
@@ -43389,9 +43525,10 @@ MonoBehaviour:
   deckDrawCard: {fileID: 0}
   cardsOnHand: {fileID: 0}
   deck: {fileID: 0}
+  tileList: {fileID: 0}
   timerUI: {fileID: 1210350945}
-  timer: 180
-  maxTimer: 30
+  timer: 30000
+  maxTimer: 30000
   maxMana: 5
   mana: 0
   manaUI: {fileID: 1756411515}
@@ -43401,6 +43538,36 @@ MonoBehaviour:
   myTurn: 1
   phaseUI: {fileID: 664132651}
   screenUIAnimator: {fileID: 1180278119}
+--- !u!114 &1363597291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363597287}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee3a5427f3529d42bea41878c690574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilesLeft: 0
+--- !u!1 &1377411338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8850254508837875747, guid: 0264c1c59c524bd47a80705b41e7365f, type: 3}
+  m_PrefabInstance: {fileID: 948864329}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1377411340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377411338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aff6cdef617ab1428e8b7a2452c899e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1397379156
 GameObject:
   m_ObjectHideFlags: 0
@@ -43533,7 +43700,7 @@ GameObject:
   - component: {fileID: 1419231825}
   - component: {fileID: 1419231827}
   m_Layer: 6
-  m_Name: tile10
+  m_Name: tile04
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43616,6 +43783,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a2c1dcc06e7eb49b9c431bd6ed7107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTiles: 1
+  storCard: {fileID: 0}
   occupieState: 0
 --- !u!199 &1419231825
 ParticleSystemRenderer:
@@ -48460,7 +48629,7 @@ GameObject:
   - component: {fileID: 1462401050}
   - component: {fileID: 1462401052}
   m_Layer: 6
-  m_Name: tile02
+  m_Name: tile05
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48543,6 +48712,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a2c1dcc06e7eb49b9c431bd6ed7107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTiles: 1
+  storCard: {fileID: 0}
   occupieState: 0
 --- !u!199 &1462401050
 ParticleSystemRenderer:
@@ -54093,7 +54264,7 @@ GameObject:
   - component: {fileID: 1910999590}
   - component: {fileID: 1910999592}
   m_Layer: 6
-  m_Name: tile09
+  m_Name: tile11
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54176,6 +54347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a2c1dcc06e7eb49b9c431bd6ed7107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTiles: 1
+  storCard: {fileID: 0}
   occupieState: 0
 --- !u!199 &1910999590
 ParticleSystemRenderer:
@@ -59020,7 +59193,7 @@ GameObject:
   - component: {fileID: 1943653818}
   - component: {fileID: 1943653820}
   m_Layer: 6
-  m_Name: tile04
+  m_Name: tile02
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59103,6 +59276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a2c1dcc06e7eb49b9c431bd6ed7107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTiles: 1
+  storCard: {fileID: 0}
   occupieState: 0
 --- !u!199 &1943653818
 ParticleSystemRenderer:
@@ -63947,7 +64122,7 @@ GameObject:
   - component: {fileID: 1946859587}
   - component: {fileID: 1946859589}
   m_Layer: 6
-  m_Name: tile06
+  m_Name: tile10
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64030,6 +64205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a2c1dcc06e7eb49b9c431bd6ed7107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTiles: 1
+  storCard: {fileID: 0}
   occupieState: 0
 --- !u!199 &1946859587
 ParticleSystemRenderer:
@@ -74135,3 +74312,5 @@ SceneRoots:
   - {fileID: 1363597288}
   - {fileID: 1894444176}
   - {fileID: 240724546}
+  - {fileID: 948864329}
+  - {fileID: 498660857}

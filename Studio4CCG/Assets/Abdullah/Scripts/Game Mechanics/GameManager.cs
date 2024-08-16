@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Compilation;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class GameManager : MonoBehaviour
 {
     //my playing deck carried from Hosted room.
-    [HideInInspector]
     public DeckDrawCard deckDrawCard;
-    [HideInInspector]
     public Hands cardsOnHand;
-    [HideInInspector]
     public Deck deck;
+    public TileList tileList;
 
     [Header("Timer")]
     public static GameManager Instance;
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         deckDrawCard = FindAnyObjectByType<DeckDrawCard>();
         cardsOnHand = FindAnyObjectByType<Hands>();
         deck = FindAnyObjectByType<Deck>();
-
+        tileList= FindAnyObjectByType<TileList>();
         healthUI.text = "Health: " + maxHealth;
         manaUI.text = "Mana: " + mana;
 
@@ -170,10 +170,14 @@ public class GameManager : MonoBehaviour
         ///  Update Health  ///
         ///  Resolve Cards ///
         ///  
+
+        
         //Notify The server 
 
 
     }
+
+
     public void EndTurn()
     {
         //mana zero

@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class TileNode : MonoBehaviour
+public partial class TileNode : MonoBehaviour
 {
     public ParticleSystem particleSystem { get; private set; }
-
-    public enum OccupieState
-    {
-        empty,
-        blocked,
-        occupied,
-    }
+    public bool playerTiles= true;
+    public Transform storCard;
     public OccupieState occupieState = OccupieState.empty;
     void Start()
     {
@@ -20,10 +15,6 @@ public class TileNode : MonoBehaviour
         particleSystem = GetComponentInChildren<ParticleSystem>();
 
     }
-
-
-
-    // Start is called before the first frame update
 
 
 

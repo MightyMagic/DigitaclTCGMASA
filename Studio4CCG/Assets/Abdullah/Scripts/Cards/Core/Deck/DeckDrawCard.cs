@@ -33,12 +33,10 @@ public class DeckDrawCard : MonoBehaviour
             //Remove from the deck. 
             //update tag.
             hand.cardsOnHand.Add(newCard);
-            hand.cardsOnHand[0].gameObject.GetComponentInChildren<BaseCard>().UpdateCardState(CardState.hand);
+            hand.cardsOnHand[hand.cardsOnHand.Count-1].gameObject.GetComponentInChildren<BaseCard>().UpdateCardState(CardState.hand);
             newCard.transform.parent = hand.gameObject.transform;
 
 
-            Debug.Log("I added " + newCard.name);
-            Debug.Log("I removed " + deck.myCards[0].name);
             deck.myCards.Remove(deck.myCards[0]);
 
             //Send Packet I drew 

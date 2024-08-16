@@ -6,7 +6,7 @@ using UnityEngine;
 public class BaseCard : MonoBehaviour
 {
     [Header("Card info")]
-    [SerializeField] string cardID;
+    public string cardID;
     [SerializeField] CreatureTypeList creatureType;
     // [SerializeField] bool targetable = true;
      
@@ -25,8 +25,7 @@ public class BaseCard : MonoBehaviour
     //for generating ID
     string characters = "zxcvbnmasdfghjklqwertyuiop1234567890";
     
-    [HideInInspector]
-    public string _ownerID;
+    public int _ownerID=0;
     private void Awake()
     {
 
@@ -36,7 +35,7 @@ public class BaseCard : MonoBehaviour
         }
        
     }
-    public void SetOwnership(string ownerID)
+    public void SetOwnership(int ownerID)
     {
         _ownerID=ownerID;
         //update the server
@@ -48,11 +47,11 @@ public class BaseCard : MonoBehaviour
         switch (enumValue)
         {
             case StatesList.health:
-                    return health = CalculateNewState(health, value);
+                    return health = CalculateNewStat(health, value);
             case StatesList.attack:
-                    return attack = CalculateNewState(attack, value);
+                    return attack = CalculateNewStat(attack, value);
             case StatesList.defense:
-                    return defense = CalculateNewState(defense, value);
+                    return defense = CalculateNewStat(defense, value);
 
 
             default:
@@ -84,7 +83,7 @@ public class BaseCard : MonoBehaviour
                 break;
             case CardState.field:
 
-                gameObject.tag = "Tile";
+                gameObject.tag = "OnTile";
                 break;
 
                 default:
@@ -93,7 +92,7 @@ public class BaseCard : MonoBehaviour
         }
     }
     
-    private int CalculateNewState(int myState, int value)
+    private int CalculateNewStat(int myState, int value)
     {
         myState = myState + value;
         if (myState < 0) myState = 0;

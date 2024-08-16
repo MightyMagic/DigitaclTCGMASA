@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class OwnershipPacket : BasePackt
 {
-    public string newOwner { get; private set; }
+    public int newOwner { get; private set; }
     public string currentCardID { get; private set; }
     // Start is called before the first frame update
     public OwnershipPacket()
     {
         //define variables
-        newOwner = "";
+        newOwner = 0;
         currentCardID = "";
     }
     //data I want to modifiy in Function. 
-    public OwnershipPacket(string text, string cardID) :
+    public OwnershipPacket(int owner, string cardID) :
         base(PacketType.OwnershipPacket)
     {
         //modify the variables
-        newOwner = text;
+        newOwner = owner;
         currentCardID = cardID;
     }
 
@@ -40,8 +40,8 @@ public class OwnershipPacket : BasePackt
     {
         base.DeSerialize(buffer, bufferOffset);
         // Read in the same order as it was serialized.
+        newOwner = binaryReader.ReadInt32();
         currentCardID = binaryReader.ReadString();
-        newOwner = binaryReader.ReadString();
 
         //Read in the same order as it was serialized
 

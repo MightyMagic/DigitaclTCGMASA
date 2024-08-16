@@ -106,11 +106,15 @@ public class NetworkManager : MonoBehaviour
                     case BasePackt.PacketType.AnimationPacket:
                         break;
                     case BasePackt.PacketType.OwnershipPacket:
+
+
                         OwnershipPacket ownershipPacket = new OwnershipPacket().DeSerialize(buffer, bufferOffset);
                         BaseCard[] cards = FindObjectsOfType<BaseCard>();
+
+                        //Find the card than switch ownership. 
                         foreach (BaseCard card in cards)
                         {
-                            if (card._ownerID == ownershipPacket.currentCardID)
+                            if (card.cardID == ownershipPacket.currentCardID)
                             {
                                 card._ownerID = ownershipPacket.newOwner;
                                 break;

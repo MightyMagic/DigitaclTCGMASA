@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 5193515826858663885}
   m_Layer: 0
   m_Name: Object
-  m_TagString: OnHands
+  m_TagString: Deck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5198,7 +5198,7 @@ MonoBehaviour:
   manaCost: 0
   BaseEffect: {fileID: 0}
   cardState: 2
-  _ownerID: 
+  _ownerID: 0
 --- !u!65 &5812317541126457582
 BoxCollider:
   m_ObjectHideFlags: 0

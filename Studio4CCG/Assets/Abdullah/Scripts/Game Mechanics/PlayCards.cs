@@ -22,17 +22,18 @@ public class PlayCards : MonoBehaviour
         // Playable & Mouse Clicked.
         if (isPlayable && Input.GetKeyUp(KeyCode.Mouse0))
         {
-            Debug.Log("Step1");
 
             LayerMask tileMask = LayerMask.GetMask("Tile");
 
-            if (Physics.Raycast(ray, out hit,Mathf.Infinity, tileMask) && hit.transform.GetComponent<TileNode>().occupieState==TileNode.OccupieState.empty)
+            if (Physics.Raycast(ray, out hit,Mathf.Infinity, tileMask) && 
+                hit.transform.GetComponent<TileNode>().occupieState==OccupieState.empty &&
+                hit.transform.GetComponent<TileNode>().playerTiles)
             {
-                Debug.Log("Step2");
 
                 //Update Card Tag
-                transform.tag = "Tile";
-                transform.GetChild(0).gameObject.tag = "Tile";
+                transform.GetChild(0).GetComponent<BaseCard>().UpdateCardState(CardState.field);
+
+
                 PlayMe(hit.collider.transform);
 
                 //prevent the button from being triggered randomly
@@ -42,9 +43,12 @@ public class PlayCards : MonoBehaviour
             else
             {
                 isPlayable = false;
+                // Disable the effect. 
+                // reset.
                 foreach (Transform tile in tileList.tileList)
                 {
-                    TileNode tileNode = tile.GetComponent<TileNode>();
+
+
                     var mainModule = tile.GetComponent<ParticleSystem>().main;
                     tile.GetComponent<ParticleSystem>().Stop();
 
@@ -57,8 +61,6 @@ public class PlayCards : MonoBehaviour
 
 
         }
-        // Disable the effect. 
-        // reset.
 
 
 
@@ -74,13 +76,17 @@ public class PlayCards : MonoBehaviour
         foreach (Transform tile in tileList.tileList)
         {
             TileNode tileNode = tile.GetComponent<TileNode>();
-            if (tileNode.occupieState == TileNode.OccupieState.empty)
+            if (tileNode.occupieState == OccupieState.empty && tileNode.playerTiles)
             {
                 var mainModule = tile.GetComponent<ParticleSystem>().main;
                 tile.GetComponent<ParticleSystem>().Play();
 
                 // Disable the loop
                 mainModule.loop = true;
+
+
+
+
             }
 
         }
@@ -91,14 +97,14 @@ public class PlayCards : MonoBehaviour
     //chose a spot to play
     public void PlayMe(Transform hit)
     {
-        Debug.Log("play the card");
 
         // Move The Card To The Tile.
         StartCoroutine(LerpToTile(hit));
 
         // Update The Tile.
-        hit.GetComponent<TileNode>().occupieState = TileNode.OccupieState.occupied;
+        hit.GetComponent<TileNode>().occupieState = OccupieState.occupied;
         transform.transform.parent = tileList.transform.parent.transform;
+        hit.GetComponent<TileNode>().storCard = transform.GetChild(0);
         //reset aniamtion.
         transform.GetComponent<Animator>().SetBool("isSelected", false);
         transform.GetComponent<Animator>().SetInteger("hover",0);
