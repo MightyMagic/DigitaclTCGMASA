@@ -5,6 +5,7 @@ using System.Collections.Generic;
 //using Networking;
 //using Networking.Lobby; get back here
 using System.Linq;
+using Unity.VisualScripting;
 
 public class Server : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class Server : MonoBehaviour
     GameObject instantiatedGameObject;
 
     LobbyData lobbyData;
+    [SerializeField] PlayersStatesData playerStatesData;
+
+    //Delete this as soon as possible, horrible thing
+    int counterOfStateCalls = 0;
 
     void Awake()
     {
@@ -34,6 +39,7 @@ public class Server : MonoBehaviour
     void Start()
     {
         lobbyData = FindFirstObjectByType<LobbyData>();
+        //playerStatesData = FindFirstObjectByType<PlayersStatesData>();
 
         PlayerInformation.Instance.SetPlayerName("SERVER");
 
@@ -158,6 +164,29 @@ public class Server : MonoBehaviour
                             case BasePacket.PacketType.StartGame:
                                 Debug.LogError($"[Server] Received Start Game Packet");
                                 SendPacketsToAllClients(new SceneLoadPacket(PlayerInformation.Instance.PlayerData, "AndreiMainScene").Serialize());
+                                break;
+
+                            case BasePacket.PacketType.PlayerStateInfo:
+                                Debug.LogError($"[Server] Received Player State Packet");
+                                PlayerStateInfoPacket playerStateInfoPacket = new PlayerStateInfoPacket().Deserialize(buffer);
+                                PlayerState playerState = new PlayerState(playerStateInfoPacket.playerState.currentHp,
+                                    playerStateInfoPacket.playerState.currentMana,
+                                    playerStateInfoPacket.playerState.playerName);
+                                playerStatesData.ReceivedPlayerState(playerState);
+
+                                // Basically fixes the issue of having a call overlap when the main game scene launches for the first time
+                                counterOfStateCalls++;
+
+                                if (counterOfStateCalls > 1)
+                                {
+                                    Debug.LogError($"[Server] Sending player states to all clients");
+
+                                    PlayersStatesPacket psp = new PlayersStatesPacket(PlayerInformation.Instance.PlayerData,
+                                        playerStatesData.playerStates);
+                                    Debug.LogError("Packet size is " + psp.Serialize().Length + " bytes");
+                                    SendPacketsToAllClients(psp.Serialize());
+                                }
+
                                 break;
                         }
                     }

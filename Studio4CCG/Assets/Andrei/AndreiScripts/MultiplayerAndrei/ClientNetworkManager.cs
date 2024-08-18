@@ -105,6 +105,17 @@ public class ClientNetworkManager : ClientDelegate
                                 SceneLoadEvent(slp);
                             }
                             break;
+
+                        case BasePacket.PacketType.PlayersStates:
+                            Debug.LogWarning($"[Client] Received new states, buffer size is " + buffer.Length);
+                            string hexString = BitConverter.ToString(buffer);
+                            Debug.LogWarning("Buffer contents (hex): " + hexString);
+                            PlayersStatesPacket psp = new PlayersStatesPacket().Deserialize(buffer);
+                            if(PlayersStatesUpdatedEvent != null)
+                            {
+                                PlayersStatesUpdatedEvent(psp);
+                            }
+                            break;
                     }
                 }
                 catch (SocketException ex)
@@ -118,9 +129,12 @@ public class ClientNetworkManager : ClientDelegate
         }
     }
 
+    // List of client events
     public event Action<LobbyInfoPacket> LobbyInfoReceivedEvent;
     public event Action StartGameEvent;
     public event Action<SceneLoadPacket> SceneLoadEvent;
+
+    public event Action<PlayersStatesPacket> PlayersStatesUpdatedEvent;
 
 
     public void Connect(string serverIPv4Address)

@@ -19,6 +19,8 @@ public class BasePacket
         PlayerReadyStatus,
         StartGame,
         SceneLoad,
+        PlayerStateInfo,
+        PlayersStates,
         Destroy
     }
 
