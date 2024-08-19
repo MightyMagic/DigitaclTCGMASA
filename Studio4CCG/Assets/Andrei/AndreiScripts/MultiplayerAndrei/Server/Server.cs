@@ -19,6 +19,7 @@ public class Server : MonoBehaviour
 
     LobbyData lobbyData;
     [SerializeField] PlayersStatesData playerStatesData;
+    [SerializeField] CardDataBase cardDataBase;
 
     //Delete this as soon as possible, horrible thing
     int counterOfStateCalls = 0;
@@ -183,9 +184,17 @@ public class Server : MonoBehaviour
 
                                     PlayersStatesPacket psp = new PlayersStatesPacket(PlayerInformation.Instance.PlayerData,
                                         playerStatesData.playerStates);
-                                    Debug.LogError("Packet size is " + psp.Serialize().Length + " bytes");
+                                    Debug.LogError($"[Server]Packet size is " + psp.Serialize().Length + " bytes");
                                     SendPacketsToAllClients(psp.Serialize());
                                 }
+
+                                break;
+                            case BasePacket.PacketType.DeckChoice:
+                                DeckChoicePacket dcp = new DeckChoicePacket().Deserialize(buffer);
+                                Debug.LogError($"[Server] Received the request for deck #" + dcp.deckIndex);
+                                // Generate deck for the player
+                                cardDataBase.PopulateDeck(dcp);
+                                // Sending the first cards of the deck to corresponding players
 
                                 break;
                         }
@@ -214,7 +223,7 @@ public class Server : MonoBehaviour
         }
     }
 
-    void SendPacketsToAllClients(byte[] buffer)
+    public void SendPacketsToAllClients(byte[] buffer)
     {
         for (int i = 0; i < clients.Count; i++)
         {

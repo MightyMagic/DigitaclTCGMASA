@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49043eebfb68c4f4e8371a7583ef1483, type: 3}
   m_Name: Abdullah
   m_EditorClassIdentifier: 
-  Name: 'Abdullah '
+  CardName: Abdullah Card
   Description: Wise programmer
   CardClass: 0
   ManaCost: 2

@@ -43,4 +43,9 @@ public class MainGameUI : MonoBehaviour
             }
         }
     }
+
+    public void UpdateCards(CardsInHandData cardsData) 
+    {
+        Debug.LogError("Showing latest cards, hooraaaay!!!!!");
+    }
 }

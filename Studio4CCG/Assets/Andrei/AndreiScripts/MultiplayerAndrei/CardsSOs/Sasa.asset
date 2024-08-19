@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49043eebfb68c4f4e8371a7583ef1483, type: 3}
   m_Name: Sasa
   m_EditorClassIdentifier: 
-  Name: Sasa the Yugioh Enjoyer
+  CardName: Sasa Card
+  CardId: 3
   Description: He's late for the tournament, don't stand in the way!
   CardClass: 0
   ManaCost: 1

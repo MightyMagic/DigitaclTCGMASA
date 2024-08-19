@@ -293,6 +293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f107852547b75c5418f815b280b10687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingHandSize: 3
+  maxHandSize: 6
   deckLists:
   - deckName: Our team
     CardsInDeck:
@@ -300,6 +302,50 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a5d6017b0cea43d44b443405434d3223, type: 2}
     - {fileID: 11400000, guid: 23d2ecc2752ada341b82a24e44587db0, type: 2}
     - {fileID: 11400000, guid: 9f103e3255fa2704eb240c0656614b16, type: 2}
+    - {fileID: 11400000, guid: 9f103e3255fa2704eb240c0656614b16, type: 2}
+    - {fileID: 11400000, guid: 9f103e3255fa2704eb240c0656614b16, type: 2}
+    - {fileID: 11400000, guid: 9f103e3255fa2704eb240c0656614b16, type: 2}
+    - {fileID: 11400000, guid: 9f103e3255fa2704eb240c0656614b16, type: 2}
+  - deckName: Knights
+    CardsInDeck:
+    - {fileID: 11400000, guid: 722f193e8356bd64fa650ee283ed7c0c, type: 2}
+    - {fileID: 11400000, guid: 722f193e8356bd64fa650ee283ed7c0c, type: 2}
+    - {fileID: 11400000, guid: 722f193e8356bd64fa650ee283ed7c0c, type: 2}
+    - {fileID: 11400000, guid: 722f193e8356bd64fa650ee283ed7c0c, type: 2}
+    - {fileID: 11400000, guid: 722f193e8356bd64fa650ee283ed7c0c, type: 2}
+    - {fileID: 11400000, guid: 722f193e8356bd64fa650ee283ed7c0c, type: 2}
+  playerHands:
+  - playerName: 
+    cardsinHand:
+    - Id: -1
+      CardName: 
+    - Id: -1
+      CardName: 
+    - Id: -1
+      CardName: 
+    - Id: -1
+      CardName: 
+    - Id: -1
+      CardName: 
+    - Id: -1
+      CardName: 
+  - playerName: 
+    cardsinHand:
+    - Id: -1
+      CardName: 
+    - Id: -1
+      CardName: 
+    - Id: -1
+      CardName: 
+    - Id: -1
+      CardName: 
+    - Id: -1
+      CardName: 
+    - Id: -1
+      CardName: 
+  activeDecks:
+  - playerName: 
+    deckList: []
 --- !u!4 &662253736
 Transform:
   m_ObjectHideFlags: 0
@@ -523,6 +569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   port: 3000
   playerStatesData: {fileID: 612882325}
+  cardDataBase: {fileID: 662253735}
 --- !u!4 &1780595247
 Transform:
   m_ObjectHideFlags: 0

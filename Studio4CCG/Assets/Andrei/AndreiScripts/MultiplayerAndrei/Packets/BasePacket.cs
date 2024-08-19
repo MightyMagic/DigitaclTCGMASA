@@ -21,6 +21,8 @@ public class BasePacket
         SceneLoad,
         PlayerStateInfo,
         PlayersStates,
+        DeckChoice,
+        CardDraw,
         Destroy
     }
 

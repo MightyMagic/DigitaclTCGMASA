@@ -116,6 +116,15 @@ public class ClientNetworkManager : ClientDelegate
                                 PlayersStatesUpdatedEvent(psp);
                             }
                             break;
+                        case BasePacket.PacketType.CardDraw:
+                            Debug.LogWarning($"[Client] Drew a new card");
+                            CardDrawPacket cdp = new CardDrawPacket().Deserialize(buffer);
+                            Debug.LogWarning("Card belongs to " + cdp.playerName + " and the name of the card is " + cdp.cardInfo.CardName);
+                            if(DrewNewCardEvent != null)
+                            {
+                                DrewNewCardEvent(cdp);
+                            }
+                            break;
                     }
                 }
                 catch (SocketException ex)
@@ -134,7 +143,12 @@ public class ClientNetworkManager : ClientDelegate
     public event Action StartGameEvent;
     public event Action<SceneLoadPacket> SceneLoadEvent;
 
+    // Related to player's hand, stats and turn order
     public event Action<PlayersStatesPacket> PlayersStatesUpdatedEvent;
+
+    public event Action<CardDrawPacket> DrewNewCardEvent;
+
+    // Related to board updates
 
 
     public void Connect(string serverIPv4Address)

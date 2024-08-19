@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49043eebfb68c4f4e8371a7583ef1483, type: 3}
   m_Name: Andrei
   m_EditorClassIdentifier: 
-  Name: Andrei the Procrastinator
+  CardName: Andrei Card
+  CardId: 1
   Description: Postponed everything till last minute, psycho mode now
   CardClass: 0
   ManaCost: 1

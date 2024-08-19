@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49043eebfb68c4f4e8371a7583ef1483, type: 3}
   m_Name: Mohit
   m_EditorClassIdentifier: 
-  Name: Mohit
+  CardName: Mohit Card
+  CardId: 2
   Description: It's mohit, he's friendly
   CardClass: 2
   ManaCost: 1
