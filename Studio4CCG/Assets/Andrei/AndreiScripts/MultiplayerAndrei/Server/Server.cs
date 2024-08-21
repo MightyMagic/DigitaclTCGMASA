@@ -6,6 +6,7 @@ using System.Collections.Generic;
 //using Networking.Lobby; get back here
 using System.Linq;
 using Unity.VisualScripting;
+using System.Collections;
 
 public class Server : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Server : MonoBehaviour
 
     //Delete this as soon as possible, horrible thing
     int counterOfStateCalls = 0;
+    public int counterOfDeckChoices = 0;
 
     void Awake()
     {
@@ -185,7 +187,7 @@ public class Server : MonoBehaviour
                                     PlayersStatesPacket psp = new PlayersStatesPacket(PlayerInformation.Instance.PlayerData,
                                         playerStatesData.playerStates);
                                     Debug.LogError($"[Server]Packet size is " + psp.Serialize().Length + " bytes");
-                                    SendPacketsToAllClients(psp.Serialize());
+                                    SendPacketsToAllClients(psp.Serialize());   
                                 }
 
                                 break;
@@ -196,6 +198,37 @@ public class Server : MonoBehaviour
                                 cardDataBase.PopulateDeck(dcp);
                                 // Sending the first cards of the deck to corresponding players
 
+                                counterOfDeckChoices++;
+
+                                if (counterOfDeckChoices == 2) // this means both players choose deck, so we can start the game
+                                {
+                                    int playerIndex = Random.Range(0, 1);
+                                    string playerName = lobbyData.PlayersData[playerIndex].Name;
+                                    Debug.LogError($"[Server]Sending players turn packet: it's " + playerName + "'s turn!");
+                                    //SendPacketsToAllClients(new PlayerTurnPacket(PlayerInformation.Instance.PlayerData, playerName).Serialize());
+                                    StartCoroutine(SendWithDelay(1.0f, playerName));
+                                }
+                                break;
+
+                            case BasePacket.PacketType.PlayerTurn:
+                                Debug.LogWarning($"[Server] Is notified that need to switch turns");
+                                PlayerTurnPacket ptp = new PlayerTurnPacket().Deserialize(buffer);
+                                // Determining whose turn it was just now, and calling next player's turn
+                                for(int k = 0; k < lobbyData.PlayersData.Length; k++)
+                                {
+                                    if (lobbyData.PlayersData[k].Name == ptp.playersTurnName)
+                                    {
+                                        switch(k)
+                                        {
+                                            case 0:
+                                                SendPacketsToAllClients(new PlayerTurnPacket(PlayerInformation.Instance.PlayerData, lobbyData.PlayersData[1].Name).Serialize());
+                                                break;
+                                            case 1:
+                                                SendPacketsToAllClients(new PlayerTurnPacket(PlayerInformation.Instance.PlayerData, lobbyData.PlayersData[0].Name).Serialize());
+                                                break;
+                                        }
+                                    }
+                                }
                                 break;
                         }
                     }
@@ -229,6 +262,12 @@ public class Server : MonoBehaviour
         {
             clients[i].Send(buffer);
         }
+    }
+
+    private IEnumerator SendWithDelay(float delay, string playerName)
+    {
+        yield return new WaitForSeconds(delay);
+        SendPacketsToAllClients(new PlayerTurnPacket(PlayerInformation.Instance.PlayerData, playerName).Serialize());
     }
 }
 

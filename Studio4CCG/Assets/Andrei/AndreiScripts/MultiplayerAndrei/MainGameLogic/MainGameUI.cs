@@ -5,10 +5,24 @@ using UnityEngine;
 
 public class MainGameUI : MonoBehaviour
 {
+    [SerializeField] ClientCardDatabase cardsDB;
+
     [SerializeField] TextMeshProUGUI currentHp;
     [SerializeField] TextMeshProUGUI currentMana;
 
     [SerializeField] TextMeshProUGUI enemyName;
+
+    [SerializeField] List<CardUIObject> cardsUI;
+
+    [SerializeField] TextMeshProUGUI phaseDebug;
+
+    private void Start()
+    {
+        for(int i = 0; i < cardsUI.Count; i++)
+        {
+            cardsUI[i].gameObject.SetActive(false);
+        }
+    }
 
 
     public void UpdateUI(PlayersStatesPacket psp)
@@ -47,5 +61,44 @@ public class MainGameUI : MonoBehaviour
     public void UpdateCards(CardsInHandData cardsData) 
     {
         Debug.LogError("Showing latest cards, hooraaaay!!!!!");
+
+        for (int i = 0; i < cardsUI.Count; i++)
+        {
+            cardsUI[i].gameObject.SetActive(false);
+
+        }
+
+        int lastIndex = 0;
+
+        for(int i = 0; i < cardsData.cardsinHand.Length; i++)
+        {
+            if (cardsData.cardsinHand[i].Id == -1)
+            {
+                lastIndex = i;
+                break;
+            }
+        }
+
+        for(int i = 0; i < lastIndex; i++)
+        {
+            cardsUI[i].gameObject.SetActive(true);
+            GetCardFromDB(i, cardsData.cardsinHand[i].CardName);
+        }
+    }
+
+    void GetCardFromDB(int indexInHand, string dbName)
+    {
+        for(int i = 0; i < cardsDB.deckLists[0].CardsInDeck.Count; i++)
+        {
+            if(dbName == cardsDB.deckLists[0].CardsInDeck[i].CardName)
+            {
+                cardsUI[indexInHand].DisplayCard(cardsDB.deckLists[0].CardsInDeck[i].CardName,
+                    cardsDB.deckLists[0].CardsInDeck[i].Description,
+                    cardsDB.deckLists[0].CardsInDeck[i].Hp,
+                    cardsDB.deckLists[0].CardsInDeck[i].ManaCost);
+
+                break;
+            }
+        }
     }
 }

@@ -126,10 +126,24 @@ public class CardDataBase : MonoBehaviour
         }
 
         // Send newly acquired cards in hand to client
+        // maybe fix with arrays...
+
+        CardInfo[] newCards = new CardInfo[list.Count];
         for(int i = 0; i < list.Count; i++)
         {
-            Server.instance.SendPacketsToAllClients(new CardDrawPacket(playerData, list[i], playerName).Serialize());
+            newCards[i] = new CardInfo();
+            newCards[i].Id = list[i].Id;
+            newCards[i].CardName = list[i].CardName;
         }
+
+        Server.instance.SendPacketsToAllClients(new MultipleCardDrawPacket(playerData, newCards.Length, newCards, playerName).Serialize());
+        Debug.LogError("Sending new " + newCards.Length + " cards to " + playerName + ".");
+
+        //for(int i = 0; i < list.Count; i++)
+        //{
+        //    Server.instance.SendPacketsToAllClients(new CardDrawPacket(playerData, list[i], playerName).Serialize());
+        //    Debug.LogError("Sending a card packet #" + i +". Card name is " + list[i].CardName);
+        //}
 
     }
 

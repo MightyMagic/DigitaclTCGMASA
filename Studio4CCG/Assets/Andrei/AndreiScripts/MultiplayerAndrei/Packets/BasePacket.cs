@@ -23,6 +23,8 @@ public class BasePacket
         PlayersStates,
         DeckChoice,
         CardDraw,
+        MultipleCardDraw,
+        PlayerTurn,
         Destroy
     }
 

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MouseTracking : MonoBehaviour
 {
+    /*
     bool playingCard = false;
     bool pointingAtPlaceHolder = false;
 
@@ -100,4 +101,5 @@ public class MouseTracking : MonoBehaviour
             }
         }
     }
+    */
 }

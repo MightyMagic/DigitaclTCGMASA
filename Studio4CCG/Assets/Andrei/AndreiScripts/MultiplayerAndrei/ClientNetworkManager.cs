@@ -125,6 +125,23 @@ public class ClientNetworkManager : ClientDelegate
                                 DrewNewCardEvent(cdp);
                             }
                             break;
+                        case BasePacket.PacketType.MultipleCardDraw:
+                            Debug.LogWarning($"[Client] Drawing multiple cards via one packet!");
+                            MultipleCardDrawPacket mcp = new MultipleCardDrawPacket().Deserialize(buffer);
+                            Debug.LogWarning("Cards belongs to " + mcp.playerName + ". There are this many cards: " + mcp.numberOfCards);
+                            if(MultipleCardDrawEvent != null)
+                            {
+                                MultipleCardDrawEvent(mcp);
+                            }
+                            break;
+                        case BasePacket.PacketType.PlayerTurn:
+                            Debug.LogWarning($"[Client] Received turn update");
+                            PlayerTurnPacket ptp = new PlayerTurnPacket().Deserialize(buffer);
+                            if(PlayerTurnEvent != null)
+                            {
+                                PlayerTurnEvent(ptp);
+                            }
+                            break;
                     }
                 }
                 catch (SocketException ex)
@@ -147,8 +164,10 @@ public class ClientNetworkManager : ClientDelegate
     public event Action<PlayersStatesPacket> PlayersStatesUpdatedEvent;
 
     public event Action<CardDrawPacket> DrewNewCardEvent;
+    public event Action<MultipleCardDrawPacket> MultipleCardDrawEvent;
 
     // Related to board updates
+    public event Action<PlayerTurnPacket> PlayerTurnEvent;
 
 
     public void Connect(string serverIPv4Address)

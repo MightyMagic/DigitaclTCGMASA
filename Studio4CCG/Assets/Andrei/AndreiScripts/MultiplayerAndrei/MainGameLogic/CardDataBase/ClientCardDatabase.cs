@@ -9,7 +9,7 @@ public class ClientCardDatabase : MonoBehaviour
 
     [SerializeField] MainGameUI gameUI;
 
-    [SerializeField] List<DeckData> deckLists;
+    public List<DeckData> deckLists;
 
     public CardsInHandData playerHandData = new CardsInHandData();
 
@@ -19,25 +19,47 @@ public class ClientCardDatabase : MonoBehaviour
     {
         playerHandData.playerName = PlayerInformation.Instance.PlayerData.Name;
 
-        ClientNetworkManager.Instance.DrewNewCardEvent += OnCardDraw;
+        ClientNetworkManager.Instance.MultipleCardDrawEvent += OnManyCardDraw;
+        // Add function for a single card draw
     }
 
-    void OnCardDraw(CardDrawPacket cdp)
+    void OnManyCardDraw(MultipleCardDrawPacket mcp)
     {
-        string playerName = cdp.playerName;
-        int cardId = cdp.cardInfo.Id;
-        string cardName = cdp.cardInfo.CardName;
+        string playerName = mcp.playerName;
+        CardInfo[] newCards = new CardInfo[mcp.cards.Length];
+
+        for(int i = 0; i < mcp.cards.Length; i++)
+        {
+            newCards[i] = new CardInfo();
+            newCards[i].Id = mcp.cards[i].Id;
+            newCards[i].CardName = mcp.cards[i].CardName;
+        }
+
+        Debug.LogError("New cards array size is " + newCards.Length);
+
+        int startIndexer = 0;
+        int cardIndexer = 0;
 
         if(PlayerInformation.Instance.PlayerData.Name == playerName)
         {
+            Debug.LogError("These cards belong to us!");
+
             for(int i = 0; i < maxHandSize; i++)
             {
                 if (playerHandData.cardsinHand[i].Id == -1)
                 {
-                    playerHandData.cardsinHand[i].Id = cardId;
-                    playerHandData.cardsinHand[i].CardName = cardName;
+                    startIndexer = i;
                     break;
                 }
+            }
+
+            while(startIndexer < maxHandSize & cardIndexer < newCards.Length)
+            {
+                playerHandData.cardsinHand[startIndexer].Id = newCards[cardIndexer].Id;
+                playerHandData.cardsinHand[startIndexer].CardName = newCards[cardIndexer].CardName;
+
+                cardIndexer++;
+                startIndexer++;
             }
 
             gameUI.UpdateCards(this.playerHandData);
