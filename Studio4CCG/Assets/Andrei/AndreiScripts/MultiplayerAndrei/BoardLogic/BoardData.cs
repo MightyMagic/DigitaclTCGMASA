@@ -140,6 +140,18 @@ public class BoardData : MonoBehaviour
         RefreshBoard();
     }
 
+    public void CheckForGameOver()
+    {
+        if(myHp <= 0)
+        {
+            ClientNetworkManager.Instance.SendPacket(new GameOverPacket(PlayerInformation.Instance.PlayerData, enemyHalf.playerName).Serialize());
+        }
+        else if(enemyHp <= 0)
+        {
+            ClientNetworkManager.Instance.SendPacket(new GameOverPacket(PlayerInformation.Instance.PlayerData, playersHalf.playerName).Serialize());
+        }
+    }
+
     public void SyncHP()
     {
         ClientNetworkManager.Instance.SendPacket(new HealthPacket(PlayerInformation.Instance.PlayerData, myHp, playersHalf.playerName, enemyHp, enemyHalf.playerName).Serialize());

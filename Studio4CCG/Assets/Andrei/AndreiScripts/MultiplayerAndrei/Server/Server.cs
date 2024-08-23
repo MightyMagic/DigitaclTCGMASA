@@ -239,6 +239,10 @@ public class Server : MonoBehaviour
                                 HealthPacket hp = new HealthPacket().Deserialize(buffer);
                                 SendPacketsToAllClients(hp.Serialize());
                                 break;
+                            case BasePacket.PacketType.GameOver:
+                                GameOverPacket gop = new GameOverPacket().Deserialize(buffer);
+                                SendPacketsToAllClients(gop.Serialize());
+                                break;
                         }
                     }
                     catch (SocketException ex)

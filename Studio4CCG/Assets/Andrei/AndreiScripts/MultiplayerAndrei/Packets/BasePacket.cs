@@ -27,7 +27,8 @@ public class BasePacket
         PlayerTurn,
         BoardState,
         Destroy,
-        Health
+        Health,
+        GameOver
     }
 
     public PacketType packetType { get; private set; }

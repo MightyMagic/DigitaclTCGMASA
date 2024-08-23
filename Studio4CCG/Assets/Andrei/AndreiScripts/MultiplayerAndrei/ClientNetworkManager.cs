@@ -157,6 +157,14 @@ public class ClientNetworkManager : ClientDelegate
                                 HealthReceivedEvent(hp);
                             }
                             break;
+                        case BasePacket.PacketType.GameOver:
+                            GameOverPacket gs = new GameOverPacket().Deserialize(buffer);
+                            Debug.LogError("Game over, " + gs.winnerName + " wins!");
+                            if(GameOverEvent != null)
+                            {
+                                GameOverEvent(gs);
+                            }
+                            break;
                     }
                 }
                 catch (SocketException ex)
@@ -182,6 +190,7 @@ public class ClientNetworkManager : ClientDelegate
     public event Action<MultipleCardDrawPacket> MultipleCardDrawEvent;
 
     public event Action<HealthPacket> HealthReceivedEvent;
+    public event Action<GameOverPacket> GameOverEvent;
 
     // Related to board updates
     public event Action<PlayerTurnPacket> PlayerTurnEvent;

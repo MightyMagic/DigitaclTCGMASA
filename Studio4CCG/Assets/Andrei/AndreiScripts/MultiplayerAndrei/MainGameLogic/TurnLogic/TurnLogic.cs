@@ -92,6 +92,8 @@ public class TurnLogic : MonoBehaviour
 
     public void EndTurn()
     {
+        boardData.CheckForGameOver();
+
         turnJustStarted = false;
         listeningToInput = false;
         isMyTurn = false;

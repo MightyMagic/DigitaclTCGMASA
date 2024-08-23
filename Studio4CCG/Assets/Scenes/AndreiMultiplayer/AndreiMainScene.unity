@@ -11530,6 +11530,7 @@ MonoBehaviour:
   deckChoiceObject: {fileID: 363973416}
   deckButtonOne: {fileID: 519382855}
   deckButtonTwo: {fileID: 1268443475}
+  gameOverSceneName: GameOverScene
 --- !u!4 &1531049652
 Transform:
   m_ObjectHideFlags: 0

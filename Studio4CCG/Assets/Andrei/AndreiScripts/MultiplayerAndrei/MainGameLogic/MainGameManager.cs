@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainGameManager : MonoBehaviour
@@ -27,10 +28,14 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] Button deckButtonOne;
     [SerializeField] Button deckButtonTwo;
 
+    [SerializeField] string gameOverSceneName;
+
+
     void Start()
     {
         ClientNetworkManager.Instance.PlayersStatesUpdatedEvent += OnPlayersStateChanged;
         ClientNetworkManager.Instance.PlayerTurnEvent += IncreaseMana;
+        ClientNetworkManager.Instance.GameOverEvent += GameIsOver;
 
         deckChoiceObject.SetActive(true);
 
@@ -48,6 +53,12 @@ public class MainGameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void GameIsOver(GameOverPacket gop)
+    {
+        PlayerPrefs.SetString("Winner", gop.winnerName);
+        SceneManager.LoadScene(gameOverSceneName);
     }
 
     void OnPlayersStateChanged(PlayersStatesPacket playerStatesPacket)
