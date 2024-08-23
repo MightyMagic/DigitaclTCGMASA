@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Compilation;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.WSA;
 
 public class GameManager : MonoBehaviour
 {
