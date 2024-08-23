@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Abdullah
   m_EditorClassIdentifier: 
   CardName: Abdullah Card
+  CardId: 0
   Description: Wise programmer
   CardClass: 0
-  ManaCost: 2
+  ManaCost: 1
   Hp: 2
   Attack: 4
   OnSummonEffect: 2

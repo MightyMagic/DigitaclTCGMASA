@@ -206,7 +206,7 @@ public class Server : MonoBehaviour
                                     string playerName = lobbyData.PlayersData[playerIndex].Name;
                                     Debug.LogError($"[Server]Sending players turn packet: it's " + playerName + "'s turn!");
                                     //SendPacketsToAllClients(new PlayerTurnPacket(PlayerInformation.Instance.PlayerData, playerName).Serialize());
-                                    StartCoroutine(SendWithDelay(1.0f, playerName));
+                                    StartCoroutine(SendTurnWithDelay(2.0f, playerName));
                                 }
                                 break;
 
@@ -229,6 +229,15 @@ public class Server : MonoBehaviour
                                         }
                                     }
                                 }
+                                break;
+                            case BasePacket.PacketType.BoardState:
+                                Debug.LogError($"[Server] Got a board state update from one of the players");
+                                StartCoroutine(SendBoardWithDelay(1f, new BoardStatePacket().Deserialize(buffer))); 
+                                break;
+                            case BasePacket.PacketType.Health:
+                                Debug.LogError($"[Server] Updating players hp");
+                                HealthPacket hp = new HealthPacket().Deserialize(buffer);
+                                SendPacketsToAllClients(hp.Serialize());
                                 break;
                         }
                     }
@@ -264,10 +273,16 @@ public class Server : MonoBehaviour
         }
     }
 
-    private IEnumerator SendWithDelay(float delay, string playerName)
+    private IEnumerator SendTurnWithDelay(float delay, string playerName)
     {
         yield return new WaitForSeconds(delay);
         SendPacketsToAllClients(new PlayerTurnPacket(PlayerInformation.Instance.PlayerData, playerName).Serialize());
+    }
+
+    private IEnumerator SendBoardWithDelay(float delay, BoardStatePacket bsp)
+    {
+        yield return new WaitForSeconds(delay);
+        SendPacketsToAllClients(bsp.Serialize());
     }
 }
 

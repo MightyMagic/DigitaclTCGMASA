@@ -21,7 +21,12 @@ public class BoardPlaceHolder : MonoBehaviour
 
     private void Start()
     {
-        
+        ownerName = PlayerInformation.Instance.PlayerData.Name;
+
+        if (!isOccupied)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public BoardPlaceHolder() { }
@@ -45,6 +50,21 @@ public class BoardPlaceHolder : MonoBehaviour
         {
             isOccupied = true;
             cardOnBoard = new CardOnBoard(cardInfo, attack, hp);
+        }
+    }
+
+    public void UpdateUI()
+    {
+        if(isOccupied)
+        {
+            if(cardOnBoard != null)
+            {
+                this.cardNameText.text = cardOnBoard.cardInfo.CardName;
+                this.currentHpText.text = cardOnBoard.currentHP.ToString();
+                this.currentAttackText.text = cardOnBoard.currentAttack.ToString();
+
+                // Add description later
+            }
         }
     }
 

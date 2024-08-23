@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+//using static UnityEditor.PlayerSettings;
 
 public class MainGameUI : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class MainGameUI : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI enemyName;
 
-    [SerializeField] List<CardUIObject> cardsUI;
+    public List<CardUIObject> cardsUI;
 
     [SerializeField] TextMeshProUGUI phaseDebug;
 
@@ -56,6 +57,12 @@ public class MainGameUI : MonoBehaviour
                 Debug.Log("psp.playerStates[" + i + "] is null.");
             }
         }
+    }
+
+    public void UpdateOffline(int Hp, int Mana)
+    {
+        currentHp.text = "HP: " + Hp.ToString();
+        currentMana.text = "Mana: " + Mana.ToString();
     }
 
     public void UpdateCards(CardsInHandData cardsData) 

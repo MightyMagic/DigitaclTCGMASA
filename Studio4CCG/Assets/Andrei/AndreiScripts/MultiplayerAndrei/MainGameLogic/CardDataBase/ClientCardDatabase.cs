@@ -65,4 +65,61 @@ public class ClientCardDatabase : MonoBehaviour
             gameUI.UpdateCards(this.playerHandData);
         }
     }
+
+    public void ReadjustHand()
+    {
+
+    }
+
+    public int IdByName(string name)
+    {
+        for(int i = 0; i < deckLists[0].CardsInDeck.Count; i++)
+        {
+            if (deckLists[0].CardsInDeck[i].CardName == name)
+            {
+                return deckLists[0].CardsInDeck[i].CardId;
+            }
+        }
+
+        return -1;
+    }
+
+    public int AttackByName(string cardName)
+    {
+        for (int i = 0; i < deckLists[0].CardsInDeck.Count; i++)
+        {
+            if (deckLists[0].CardsInDeck[i].CardName == cardName)
+            {
+                return deckLists[0].CardsInDeck[i].Attack;
+            }
+        }
+
+        return -1;
+    }
+
+    public int CardHPByName(string cardName)
+    {
+        for(int i = 0; i < deckLists[0].CardsInDeck.Count; i++)
+        {
+            if (deckLists[0].CardsInDeck[i].CardName == cardName)
+            {
+                return deckLists[0].CardsInDeck[i].Hp;
+            }
+        }
+
+        return -1;
+    }
+
+    public int ManaByName(string name)
+    {
+        for (int i = 0; i < deckLists[0].CardsInDeck.Count; i++)
+        {
+            if (deckLists[0].CardsInDeck[i].CardName == name)
+            {
+                return deckLists[0].CardsInDeck[i].ManaCost;
+            }
+        }
+
+        return 0;
+    }
 }

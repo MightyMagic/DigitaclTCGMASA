@@ -25,7 +25,9 @@ public class BasePacket
         CardDraw,
         MultipleCardDraw,
         PlayerTurn,
-        Destroy
+        BoardState,
+        Destroy,
+        Health
     }
 
     public PacketType packetType { get; private set; }

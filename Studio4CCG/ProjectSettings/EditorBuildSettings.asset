@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AndreiMultiplayer/AndreiMainScene.unity
     guid: b4960fe621023d8409dad0a07c7be999
+  - enabled: 0
+    path: Assets/Scenes/AndreiMultiplayer/GameOverScene.unity
+    guid: 6c9cb8f51afa88a4aad5854bfd2fff5b
   m_configObjects: {}

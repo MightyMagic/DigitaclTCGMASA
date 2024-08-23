@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardUIObject : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI CardName;
-    [SerializeField] TextMeshProUGUI CardDescription;
+    public TextMeshProUGUI CardName;
+    public TextMeshProUGUI CardDescription;
 
-    [SerializeField] TextMeshProUGUI hp;
-    [SerializeField] TextMeshProUGUI manaCost;
+    public TextMeshProUGUI hp;
+    public TextMeshProUGUI manaCost;
+
+    public Button playCardButton;
+
+    public int handIndex;
     void Start()
     {
         

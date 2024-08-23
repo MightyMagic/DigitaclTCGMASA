@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class TurnUI : MonoBehaviour
 {
     [SerializeField] Button endTurnButton;
-    //[SerializeField] TextMeshProUGUI phaseUI;
+    [SerializeField] TextMeshProUGUI phaseUI;
     private void Start()
     {
         //endTurnButton.gameObject.SetActive(false);
@@ -23,5 +23,18 @@ public class TurnUI : MonoBehaviour
     {
         endTurnButton.gameObject.SetActive(false);
         //phaseUI.text = "Opponent's turn";
+    }
+
+    public void DisplayPhase(bool b, string text)
+    {
+        if (b)
+        {
+            phaseUI.gameObject.SetActive(true);
+            phaseUI.text = text;
+        }
+        else
+        {
+            phaseUI.gameObject.SetActive(false);
+        }
     }
 }

@@ -16,10 +16,12 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] int maximumMana;
 
     public int startTurnMana;
+
     public int currentMana;
+    public int currentHp;
 
     [Header("UI")]
-    [SerializeField] MainGameUI gameUI;
+    public MainGameUI gameUI;
 
     [SerializeField] GameObject deckChoiceObject;
     [SerializeField] Button deckButtonOne;
@@ -28,11 +30,15 @@ public class MainGameManager : MonoBehaviour
     void Start()
     {
         ClientNetworkManager.Instance.PlayersStatesUpdatedEvent += OnPlayersStateChanged;
+        ClientNetworkManager.Instance.PlayerTurnEvent += IncreaseMana;
 
         deckChoiceObject.SetActive(true);
 
         deckButtonOne.onClick.AddListener(() => ChooseDeck(0));
         deckButtonTwo.onClick.AddListener(() => ChooseDeck(1));
+
+        currentHp = startHp;
+        currentMana = startMana;
 
         ClientNetworkManager.Instance.SendPacket(new PlayerStateInfoPacket(PlayerInformation.Instance.PlayerData, 
             startHp, startMana, 
@@ -46,6 +52,27 @@ public class MainGameManager : MonoBehaviour
 
     void OnPlayersStateChanged(PlayersStatesPacket playerStatesPacket)
     {
+        // Update player stats
+        for (int i = 0; i < 2; i++)
+        {
+            if (playerStatesPacket.playerStates[i] != null)
+            {
+                if (playerStatesPacket.playerStates[i].playerName == PlayerInformation.Instance.PlayerData.Name)
+                {
+                    Debug.Log("Player found: Updating UI for current player.");
+
+                    currentHp = playerStatesPacket.playerStates[i].currentHp;
+                    currentMana = playerStatesPacket.playerStates[i].currentMana;
+
+                    //break; // Exit loop once player is found
+                }
+                else
+                {
+                    //Debug.Log("psp.playerStates[" + i + "] is null.");
+                }
+            }
+        }
+
         //Update UI
         gameUI.UpdateUI(playerStatesPacket);
     }
@@ -69,23 +96,21 @@ public class MainGameManager : MonoBehaviour
         //    PlayerInformation.Instance.PlayerData.Name).Serialize());
     }
 
-    void BeginningOfMyTurn()
+    void IncreaseMana(PlayerTurnPacket ptp)
     {
-
-    }
-
-    void UpdateUI()
-    {
-
-    }
-
-    void IncreaseMana(int mana)
-    {
-        if (startTurnMana < maximumMana)
+        if(ptp.playersTurnName == PlayerInformation.Instance.PlayerData.Name)
         {
-            startTurnMana++;
-        }
+            //if (startMana == 0)
+            //    startMana = 1;
 
-        currentMana = startTurnMana;
+            if (startTurnMana < maximumMana)
+            {
+                startTurnMana++;
+            }
+
+            currentMana = startTurnMana;
+
+            gameUI.UpdateOffline(currentHp, currentMana);
+        }   
     }
 }

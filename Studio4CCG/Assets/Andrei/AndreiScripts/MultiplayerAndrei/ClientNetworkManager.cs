@@ -142,6 +142,21 @@ public class ClientNetworkManager : ClientDelegate
                                 PlayerTurnEvent(ptp);
                             }
                             break;
+                        case BasePacket.PacketType.BoardState:
+                            Debug.LogFormat($"[Client] Received a board update from the server");
+                            BoardStatePacket bsp = new BoardStatePacket().Deserialize(buffer);
+                            if(BoardStateUpdatedEvent != null)
+                            {
+                                BoardStateUpdatedEvent(bsp);
+                            }
+                            break;
+                        case BasePacket.PacketType.Health:
+                            HealthPacket hp = new HealthPacket().Deserialize(buffer);
+                            if(HealthReceivedEvent != null)
+                            {
+                                HealthReceivedEvent(hp);
+                            }
+                            break;
                     }
                 }
                 catch (SocketException ex)
@@ -166,8 +181,11 @@ public class ClientNetworkManager : ClientDelegate
     public event Action<CardDrawPacket> DrewNewCardEvent;
     public event Action<MultipleCardDrawPacket> MultipleCardDrawEvent;
 
+    public event Action<HealthPacket> HealthReceivedEvent;
+
     // Related to board updates
     public event Action<PlayerTurnPacket> PlayerTurnEvent;
+    public event Action<BoardStatePacket> BoardStateUpdatedEvent;
 
 
     public void Connect(string serverIPv4Address)
